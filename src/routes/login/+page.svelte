@@ -1,78 +1,21 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import type { ActionData } from './$types';
-	import { Input } from '$lib/components';
-	import type { PageData } from '../$types';
-	export let form: ActionData;
-	export let data: PageData;
+	// === Components ===
+	import { Header, Text } from '$lib/components';
+	import { Flex, Frame } from 'sk-clib';
+	import CredentialForm from './steps/CredentialForm.svelte';
+    import Logo from '$lib/images/Logo.png'
 </script>
 
-<!-- Full screen container -->
-<div class="fixed inset-0 -z-[100] overflow-hidden w-screen h-[300vh] bg-backdrop-light dark:bg-backdrop mt-[100vh]"></div>
-<div class="flex flex-col min-h-screen bg-backdrop-light dark:bg-backdrop ml-[1rem] mr-[1rem]">
-
-	<!-- Header -->
-	<h1 class="text-[32px] pt-[86px] font-bold ml-[5px] mb-0 dark:text-white">Sign In</h1>
-	<p class="mt-0 ml-[5px] mb-[10px] text-[12px] text-subheading">
-		Welcome back to QuestOwl!
-	</p>
-
-	<!-- Form Section -->
-	<form
-		method="POST"
-		autocomplete="off"
-		use:enhance
-		class="flex flex-col flex-grow rounded-t-2xl py-8 px-6 box-border gap-4 bg-white dark:bg-secondary"
-	>
-		<div>
-			<Input type="email"
-			id="email_input"
-			name="email"
-			label="Email"
-			value={form?.email ?? ""} />
-		</div>
-		<div>
-			<Input type="password" class="mb-[12px]" id="password_input" label="Password" name="password" />
-		</div>
-		
-
-		<!-- Submit Button -->
-		<button class="h-12 w-full rounded-xl bg-primary text-center text-white hover:cursor-pointer">
-			Sign In
-		</button>
-
-		<!-- Sign In Link -->
-		<p class="text-center text-subheading text-[14px]">
-			Don't have an account? <a class="text-primary font-bold underline" href="/register">Get Started</a>
-		</p>
-
-<div class="mt-10 flex flex-col text-center justify-center items-center">
-			<!-- Optional messages -->
-			{#if form?.error}
-				<div
-					id="toast-danger"
-					class="mb-4 flex w-full max-w-xs items-center rounded-lg bg-backdrop-light p-4 text-gray-500 shadow-sm dark:bg-gray-800 dark:text-gray-400"
-					role="alert"
-				>
-					<div
-						class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200"
-					>
-						<svg
-							class="h-5 w-5"
-							aria-hidden="true"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="currentColor"
-							viewBox="0 0 20 20"
-						>
-							<path
-								d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"
-							/>
-						</svg>
-						<span class="sr-only">Error icon</span>
-					</div>
-					<div class="ms-3 text-sm">{form.error}</div>
-				</div>
-			{/if}
-		</div>
-	</form>
-</div>
+<Flex col fill class="mt-20">
+    <Header bold class="ml-4 sm:ml-0 !text-3xl">Sign In</Header> <!--The size don't work-->
+	<Text lg class="ml-4 opacity-80 sm:ml-0">ooooo</Text>
+	<Frame flex col fill class="dark:bg-secondary mt-2 box-border rounded-t-2xl bg-white p-6">
+        <Flex row fill>
+                <CredentialForm/>
+            <Frame class="lg:w-full hidden lg:block mt-[8%] lg:ml-4">
+                <img src={Logo} alt="Logo"/>
+            </Frame>
+        </Flex>
+		<img src={Logo} alt="Logo" class="w-full block object-contain lg:hidden" />
+	</Frame>
+</Flex>

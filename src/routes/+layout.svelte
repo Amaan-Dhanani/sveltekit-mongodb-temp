@@ -25,7 +25,7 @@
 		{@render children()}
 		<Speedial />
 	</div>
-{:else if pageName === '/login/test'}
+{:else if pageName === '/login' || pageName === '/register'}
 	<Flex fill class=" bg-backdrop-light dark:bg-backdrop overflow-y-auto">
 		<Frame flex col class="animate mx-auto w-full max-w-full sm:max-w-3/4 md:max-w-3/5 lg:max-w-3/4 ">
 			{@render children()}

@@ -8,12 +8,12 @@
 </script>
 
 <!-- Full screen container -->
-<div class="fixed inset-0 -z-[100] overflow-hidden w-screen h-[300vh] bg-[#F0F0F2] dark:bg-[#1F1F39] mt-[100vh]"></div>
-<div class="flex flex-col min-h-screen bg-[#F0F0F2] dark:bg-[#1F1F39] ml-[1rem] mr-[1rem]">
+<div class="fixed inset-0 -z-[100] overflow-hidden w-screen h-[300vh] bg-backdrop-light dark:bg-backdrop mt-[100vh]"></div>
+<div class="flex flex-col min-h-screen bg-backdrop-light dark:bg-backdrop ml-[1rem] mr-[1rem]">
 
 	<!-- Header -->
 	<h1 class="text-[32px] pt-[86px] font-bold ml-[5px] mb-0 dark:text-white">Sign In</h1>
-	<p class="mt-0 ml-[5px] mb-[10px] text-[12px] text-[#B8B8D2]">
+	<p class="mt-0 ml-[5px] mb-[10px] text-[12px] text-subheading">
 		Welcome back to QuestOwl!
 	</p>
 
@@ -22,7 +22,7 @@
 		method="POST"
 		autocomplete="off"
 		use:enhance
-		class="flex flex-col flex-grow rounded-t-2xl py-8 px-6 box-border gap-4 bg-white dark:bg-[#2F2F42]"
+		class="flex flex-col flex-grow rounded-t-2xl py-8 px-6 box-border gap-4 bg-white dark:bg-secondary"
 	>
 		<div>
 			<Input type="email"
@@ -37,13 +37,13 @@
 		
 
 		<!-- Submit Button -->
-		<button class="h-12 w-full rounded-xl bg-[#3d5cff] text-center text-white hover:cursor-pointer">
+		<button class="h-12 w-full rounded-xl bg-primary text-center text-white hover:cursor-pointer">
 			Sign In
 		</button>
 
 		<!-- Sign In Link -->
-		<p class="text-center text-[#858597] text-[14px]">
-			Don't have an account? <a class="text-[#3D5CFF] font-bold underline" href="/register">Get Started</a>
+		<p class="text-center text-subheading text-[14px]">
+			Don't have an account? <a class="text-primary font-bold underline" href="/register">Get Started</a>
 		</p>
 
 <div class="mt-10 flex flex-col text-center justify-center items-center">
@@ -51,7 +51,7 @@
 			{#if form?.error}
 				<div
 					id="toast-danger"
-					class="mb-4 flex w-full max-w-xs items-center rounded-lg bg-[#F0F0F2] p-4 text-gray-500 shadow-sm dark:bg-gray-800 dark:text-gray-400"
+					class="mb-4 flex w-full max-w-xs items-center rounded-lg bg-backdrop-light p-4 text-gray-500 shadow-sm dark:bg-gray-800 dark:text-gray-400"
 					role="alert"
 				>
 					<div

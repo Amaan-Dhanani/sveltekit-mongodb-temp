@@ -2,7 +2,7 @@
 	@component
 
 	@status  
-		KEEP FOR NOW - This is a great component for this project!
+		KEEP FOR NOW
 
 	@history  
 		- Inspired by input component created. Input component's history is currently pending.
@@ -19,7 +19,7 @@
 
 		// --- Default Classes 
 		inputClass = $bindable('dark:bg-[#3E3E55] dark:text-white dark:border-[0px] border-[1px] border-[#e0e0e2] rounded-3 px-3 py-4 w-full text-[14px] rounded-[12px]'),
-		labelClass = $bindable('text-[#858597] text-[14px]'),
+		labelClass = $bindable('text-[#b8b8d2] text-[14px]'),
 
 		// --- User Defined Classes
 		classLabel = $bindable(''),

@@ -12,7 +12,7 @@
 @requirements  
 <br>
 	- Depends on `"./mode.ts"` developed by GitHub user TreltaSev
-	- Depends on layout.svelte to actually apply light/dark themes
+	- Depends on addtional code +layout.svelte, app.html, and main css to actually apply light/dark themes
 	- Depends on certain colors for theme default to allow integration with Speedial Component if needed, but could be overrided
 -->
 <script lang="ts">

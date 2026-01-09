@@ -6,7 +6,7 @@
 ## Packages 
 - TailwindCSS
 - MongoDB Altas
-- Components by npm package `sk-clib`, created by github user `TreltaSev`
+- Components by npm package `sk-clib`, created by GitHub user `TreltaSev`
 
 ## How to (components)
 

@@ -1,17 +1,12 @@
 <script lang="ts">
-
-  // Global CSS Import
-  import '$lib/css/app.css';
+	import '$lib/css/app.css';
 
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
-	import { LightDark } from '$lib/components';
-	import { global_mode$ } from '$lib/components/darklight/mode';
+	import { global_mode$ } from '$lib/components/lightdark/mode';
 	import Speedial from '$lib/components/speedial/speedial.svelte';
-
-	let pageName = page.url.pathname;
-
-	let mode$ = global_mode$.mode$;
+	import { Flex, Frame } from 'sk-clib';
+	let { children } = $props();
 
 	onMount(() => {
 		mode$.subscribe((v) => {
@@ -19,32 +14,31 @@
 			document.documentElement.classList.toggle('dark', v === 'dark');
 		});
 	});
+
+	let pageName = page.url.pathname;
+
+	let mode$ = global_mode$.mode$;
 </script>
 
-
-{#if pageName === "/register" || pageName === "/login" || pageName === "/account"}
-  <div class="w-full -z-10000 bg-[#F0F0F2] dark:bg-[#1F1F39]">
-    <main class="size-full">
-      <slot />
-      <Speedial />
-    </main>
-  </div>
-{:else if pageName === "/dashboard"}
-  <div class="w-full -z-10000 bg-[#3D5CFF]">
-    <main class="size-full">
-      <slot />
-      <Speedial />
-    </main>
-  </div>
-{:else if pageName.startsWith("/create")}
-  <div class="w-full -z-10000 bg-[#4c4c61] dark:bg-[#1F1F39]">
-    <main class="size-full">
-      <slot />
-      <Speedial />
-    </main>
-  </div>
+{#if pageName === '/dashboard'}
+	<div class="-z-10000 w-full bg-primary">
+		{@render children()}
+		<Speedial />
+	</div>
+{:else if pageName === '/login/test'}
+	<Flex fill class=" bg-backdrop-light dark:bg-backdrop overflow-y-auto">
+		<Frame flex col class="animate mx-auto w-full max-w-full sm:max-w-3/4 md:max-w-3/5 lg:max-w-3/4 ">
+			{@render children()}
+		</Frame>
+	</Flex>
+{:else}
+	<div class="-z-10000 w-full bg-backdrop-light dark:bg-backdrop">
+		<main class="size-full">
+			{@render children()}
+			<Speedial />
+		</main>
+	</div>
 {/if}
-
 
 <style>
 	main {
@@ -52,9 +46,3 @@
 		margin-inline: auto;
 	}
 </style>
-
-
-<div>
-
-    
-</div>

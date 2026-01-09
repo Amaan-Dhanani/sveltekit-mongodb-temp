@@ -15,7 +15,7 @@
 	export let pillClass = '';
 
 	const baseClass =
-		'h-[30px] rounded-[5px] text-[12px] px-4 flex items-center justify-center bg-gray-200 text-black peer-checked:bg-[#3D5CFF] peer-checked:text-white';
+		'h-[30px] rounded-[5px] text-[12px] px-4 flex items-center justify-center bg-gray-200 text-black peer-checked:bg-[#3d5cff] peer-checked:text-white';
 </script>
 <div class={cn("flex select-none flex-wrap gap-2 justify-center", className)}>
 	{#each options as { label, value }}

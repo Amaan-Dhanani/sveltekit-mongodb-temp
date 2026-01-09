@@ -6,12 +6,12 @@
 </script>
 <!-- Full screen container -->
 <div
-	class="fixed inset-0 -z-[100] mt-[100vh] h-[300vh] w-screen overflow-hidden bg-[#F0F0F2] dark:bg-[#1F1F39]"
+	class="fixed inset-0 -z-[100] mt-[100vh] h-[300vh] w-screen overflow-hidden bg-backdrop-light dark:bg-backdrop"
 ></div>
-<div class="flex min-h-screen flex-col bg-[#F0F0F2] dark:bg-[#1F1F39] ml-[1rem] mr-[1rem]">
+<div class="flex min-h-screen flex-col bg-backdrop-light dark:bg-backdrop ml-[1rem] mr-[1rem]">
 	<!-- Header -->
 	<h1 class="mb-0 ml-[5px] pt-[86px] text-[32px] font-bold dark:text-white">Get Started</h1>
-	<p class="mt-0 mb-[10px] ml-[5px] text-[12px] text-[#B8B8D2]">
+	<p class="mt-0 mb-[10px] ml-[5px] text-[12px] text-subheading">
 		Enter your details below to start your journey!
 	</p>
 
@@ -20,7 +20,7 @@
 		method="POST"
 		autocomplete="off"
 		use:enhance
-		class="box-border flex flex-grow flex-col gap-4 rounded-t-2xl bg-white px-6 py-8 dark:bg-[#2F2F42]"
+		class="box-border flex flex-grow flex-col gap-4 rounded-t-2xl bg-white px-6 py-8 dark:bg-secondary"
 	>
 		<div>
 			<Input
@@ -47,14 +47,14 @@
 
 		<!-- Submit Button -->
 		<button
-			class="h-12 w-full rounded-xl bg-[#3d5cff] text-center text-white hover:cursor-pointer"
+			class="h-12 w-full rounded-xl bg-primary text-center text-white hover:cursor-pointer"
 		>
 			Register
 		</button>
 
 		<!-- Sign In Link -->
-		<p class="text-center text-[14px] text-[#858597]">
-			Already have an account? <a class="font-bold text-[#3D5CFF] underline" href="/login">Sign In</a
+		<p class="text-center text-[14px] text-subheading">
+			Already have an account? <a class="font-bold text-primary underline" href="/login">Sign In</a
 			>
 		</p>
 		<div class="mt-10 flex flex-col text-center justify-center items-center">
@@ -62,7 +62,7 @@
 			{#if form?.message}
 				<div
 					id="toast-success"
-					class="mb-4 flex w-full max-w-xs items-center rounded-lg bg-[#F0F0F2] p-4 text-gray-500 shadow-sm dark:bg-gray-800 dark:text-gray-400"
+					class="mb-4 flex w-full max-w-xs items-center rounded-lg bg-backdrop-light p-4 text-gray-500 shadow-sm dark:bg-gray-800 dark:text-gray-400"
 					role="alert"
 				>
 					<div
@@ -87,7 +87,7 @@
 			{#if form?.error}
 				<div
 					id="toast-danger"
-					class="mb-4 flex w-full max-w-xs items-center rounded-lg bg-[#F0F0F2] p-4 text-gray-500 shadow-sm dark:bg-gray-800 dark:text-gray-400"
+					class="mb-4 flex w-full max-w-xs items-center rounded-lg bg-backdrop-light p-4 text-gray-500 shadow-sm dark:bg-gray-800 dark:text-gray-400"
 					role="alert"
 				>
 					<div

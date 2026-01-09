@@ -1,3 +1,14 @@
+<!--
+@component
+
+@status
+<br>
+	KEEP-MOD - This is a great component for this project, it just needs to modified to satisfy better icon code, and easier color management
+
+@requirements
+<br>
+	- Depends on certain colors for theme default to allow integration with components in speeddial itself
+-->
 <script lang="ts">
 	import { writable } from 'svelte/store';
 	import { LightDark } from '..';

@@ -1,4 +1,18 @@
+<!--
+@component
 
+@status
+<br>
+	KEEP-MOD - This is a great component for this project, it just needs to modified to satisfy better icon code, and easier color management
+
+@history
+<br>
+	This component was inspired from the LightDark component that I created. The LightDark's component's history can be viewed separately.
+
+@requirements
+<br>
+	- Depends on certain colors for theme default to allow integration with Speedial Component if needed, but could be overrided
+-->
 <button
 	class="fixed left-22 p-3 rounded-full bg-blue-700 hover:bg-blue-900 text-gray-300 shadow-lg transition-colors"
 	on:click={() => location.reload()}

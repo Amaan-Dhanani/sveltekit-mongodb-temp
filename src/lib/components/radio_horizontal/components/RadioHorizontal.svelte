@@ -1,3 +1,10 @@
+<!--
+@component
+
+@status
+<br>
+	UPDATE - There are better updates that were made to this component in DriveHenrico repo
+-->
 <script lang="ts">
 	import { cn } from '$lib/components/utils';
 

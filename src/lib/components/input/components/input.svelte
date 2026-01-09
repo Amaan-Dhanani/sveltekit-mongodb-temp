@@ -1,5 +1,11 @@
-<script lang="ts">
+<!--
+@component
 
+@status
+<br>
+    UPDATE - There are better updates that were made to this component in DriveHenrico repo
+-->
+<script lang="ts">
     // --- Logic ---
     import { cn } from '$lib/components/utils';
     import type { Props } from ".."

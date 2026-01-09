@@ -1,5 +1,22 @@
+<!--
+@component
+
+@status
+<br>
+	KEEP-MOD - This is a great component for this project, it just needs to modified to satisfy better icon code, and easier color management
+
+@history
+<br>  
+	This component was taken from user `TreltaSev` and modified to satisfy my needs.
+
+@requirements  
+<br>
+	- Depends on `"./mode.ts"` developed by GitHub user TreltaSev
+	- Depends on layout.svelte to actually apply light/dark themes
+	- Depends on certain colors for theme default to allow integration with Speedial Component if needed, but could be overrided
+-->
 <script lang="ts">
-	import { global_mode$ } from '$lib/components/darklight/mode';
+	import { global_mode$ } from './mode';
 	import { type Writable } from 'svelte/store';
 
 	let mode$: Writable<'dark' | 'light' | string> = global_mode$.mode$;

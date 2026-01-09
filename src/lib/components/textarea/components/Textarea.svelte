@@ -1,3 +1,14 @@
+<!--
+	@component
+
+	@status  
+		KEEP FOR NOW - This is a great component for this project!
+
+	@history  
+		- Inspired by input component created. Input component's history is currently pending.
+
+-->
+
 <script lang="ts"> 
 	import { cn } from '$lib/components/utils';
 	import type { Props } from "..";

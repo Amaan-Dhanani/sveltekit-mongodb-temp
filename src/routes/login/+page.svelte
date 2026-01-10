@@ -8,7 +8,7 @@
 
 <Flex col fill class="mt-20">
     <Header bold class="ml-4 sm:ml-0 !text-3xl">Sign In</Header> <!--The size don't work-->
-	<Text lg class="ml-4 opacity-80 sm:ml-0">ooooo</Text>
+	<Text lg class="ml-4 opacity-80 sm:ml-0">Welcome Back!</Text>
 	<Frame flex col fill class="dark:bg-secondary mt-2 box-border rounded-t-2xl bg-white p-6">
         <Flex row fill>
                 <CredentialForm/>

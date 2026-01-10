@@ -13,12 +13,12 @@
 <!-- Form Section -->
 
 <form method="POST" autocomplete="off" use:enhance class="box-border flex w-full flex-col">
-	<div class="mb-4">
+	<Frame class="mb-4">
 		<Input type="email" id="email_input" name="email" label="Email" value={form?.email ?? ''} />
-	</div>
-	<div class="mb-4">
-		<Input type="password" class="mb-[12px]" id="password_input" label="Password" name="password" />
-	</div>
+	</Frame>
+	<Frame class="mb-7">
+		<Input type="password" id="password_input" label="Password" name="password" />
+	</Frame>
 
 	<!-- Submit Button -->
 	<Button class="bg-primary mb-4 h-12 cursor-pointer rounded-xl text-white">Sign In</Button>

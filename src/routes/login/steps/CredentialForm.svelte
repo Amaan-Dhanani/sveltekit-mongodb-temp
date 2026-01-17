@@ -1,13 +1,9 @@
 <script lang="ts">
 	// === Components ===
-	import { Header, Text } from '$lib/components';
+	import { Text } from '$lib/components';
 	import { Flex, Frame, Button } from 'sk-clib';
 	import { enhance } from '$app/forms';
-	import type { ActionData } from './$types';
 	import { Input } from '$lib/components';
-	import type { PageData } from '../$types';
-	export let form: ActionData;
-	export let data: PageData;
 </script>
 
 <!-- Form Section -->

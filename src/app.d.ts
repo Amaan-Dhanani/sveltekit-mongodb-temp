@@ -1,3 +1,5 @@
+import 'unplugin-icons/types/svelte'
+
 declare global {
 	type user = {
 		id: string;

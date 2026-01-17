@@ -3,20 +3,13 @@
 	import { Text } from '$lib/components';
 	import { Flex, Frame, Button } from 'sk-clib';
 	import { enhance } from '$app/forms';
-	import type { ActionData } from './$types';
 	import { Input } from '$lib/components';
-	import type { PageData } from '../$types';
-	export let form: ActionData;
-	export let data: PageData;
 </script>
 
-<!-- Form Section -->
-
-<form method="POST" autocomplete="off" use:enhance class="box-border flex size-full flex-col">
+<form method="POST" autocomplete="off" use:enhance class="box-border flex size-full flex-col ">
 	<Frame class="mb-4">
 		<Input type="text" id="name_input" name="name" label="Name" value={form?.user?.name ?? ''} />
 	</Frame>
-	<!--START HERE-->
 	<Frame class="mb-4">
 		<Input type="email" id="email_input" name="email" label="Email" value={form?.user?.email ?? ''} />
 	</Frame>
@@ -33,5 +26,4 @@
 		<Text lg class="opacity-80">Already have an account?</Text>
 		<a href="/login" class="text-primary font-bold underline">Sign In</a>
 	</Flex>
-	<!-- svelte-ignore a11y_missing_attribute -->
 </form>

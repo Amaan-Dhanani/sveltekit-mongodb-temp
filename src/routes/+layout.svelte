@@ -1,18 +1,9 @@
 <script lang="ts">
 	// CSS
-	import '$lib/css/app.css';
+	import '../app.css';
 
 	// PAGE STATE (SvelteKit + Svelte 5)
 	import { page } from '$app/state';
-
-	// DATA FROM LOAD / ACTIONS
-	import type { PageData, ActionData } from './$types';
-	let {
-        children,
-        data: PageData,
-        form: ActionData,
-        ...rest
-    } = $props();
 
 	// REACTIVE PATHNAME
 	const pageName = $derived(page.url.pathname);
@@ -22,6 +13,7 @@
 	import { global_mode$ } from '$lib/components/lightdark/mode';
 	import Speedial from '$lib/components/speedial/speedial.svelte';
 	import { Flex, Frame } from 'sk-clib';
+	let { children } = $props();
 
 	// THEME
 	const mode$ = global_mode$.mode$;

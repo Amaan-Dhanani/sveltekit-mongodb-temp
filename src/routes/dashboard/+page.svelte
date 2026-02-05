@@ -17,9 +17,6 @@
 		class="mb-[95px] box-border flex flex-grow flex-col gap-4 rounded-t-2xl bg-white px-6 py-8 dark:bg-secondary"
 	>
 			<div class="gap-0 dark:text-white">
-				<h2 class="mt-0 text-[16px]">
-					
-				</h2>
 				<div
 					class="box-border flex flex-grow flex-col rounded-t-2xl bg-white px-6 py-8 dark:bg-secondary"
 				>

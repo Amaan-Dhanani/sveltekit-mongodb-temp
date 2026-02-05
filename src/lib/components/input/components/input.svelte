@@ -1,49 +1,66 @@
-<!--
-@component
-
-@status
-<br>
-    UPDATE - There are better updates that were made to this component in DriveHenrico repo
--->
+ <!-- svelte-ignore state_referenced_locally -->
 <script lang="ts">
-    // --- Logic ---
-    import { cn } from '$lib/components/utils';
-    import type { Props } from ".."
-    
-    let {
-        children,
-        class: className,
-        
-        // --- Default Classes 
-        inputClass = $bindable('dark:bg-[#3E3E55] truncate dark:text-white dark:border-[0px] border-[1px] border-[#e0e0e2] rounded-3 px-3 py-4 w-full text-[14px] w-full rounded-[12px] px-4 py-3'),
-        labelClass = $bindable('text-[#b8b8d2] text-[14px]'),
+	import { cn } from '$lib/utils';
+	import type { Props } from '..';
+	import Eye from '~icons/heroicons/eye';
+	import EyeSlash from '~icons/heroicons/eye-slash';
 
-        // --- User Defined Classes
-        classLabel = $bindable(''),
+	let {
+		type = '',
+		children,
+		class: className,
+		inputClass = $bindable(
+			'dark:bg-[#3E3E55] bg-[#F0F0F2] truncate dark:text-white dark:outline-0 outline box-border outline-[#e0e0e2] rounded-3 px-3 py-4 w-full text-[14px] rounded-[12px] px-4 py-3'
+		),
+		labelClass = $bindable('text-[#858597] text-[14px]'),
+		classLabel = $bindable(''),
+		label = $bindable(undefined),
+        value = $bindable(undefined),
+		...rest
+	}: Props = $props();
 
-        // --- Input Props
-        label = $bindable(undefined),
+	const inputId = rest.id ?? 'hs-input-' + crypto.randomUUID();
 
-        ...rest
-    }: Props = $props();
+	// --- reactive classes
+	let inputCls = $state(cn(inputClass, className));
+	let labelCls = $state(cn(labelClass, classLabel));
+	$effect(() => {
+		inputCls = cn(inputClass, className);
+		labelCls = cn(labelClass, classLabel);
+	});
 
-
-    // Setup Input's class
-
-    let inputCls = $state(cn(inputClass, className));
-    let labelCls = $state(cn(labelClass, classLabel))
-    $effect(() => {
-        inputCls = cn(inputClass, className)
-        labelCls = cn(labelClass, classLabel)
-    })
-
+	// --- password toggling
+	let showPassword = $state(false);
+	function togglePassword() {
+		showPassword = !showPassword;
+	}
 </script>
 
-
-{#if label !== undefined} 
-    <label class={labelCls} for={rest.id}>{label}</label>
+{#if label !== undefined}
+	<label class={labelCls} for={inputId}>{label}</label>
 {/if}
 
-<input class={inputCls} {...rest}/>
+{#if type === 'password'}
+	<div class={cn("relative !m-0 !p-0", inputCls)}>
+		<input id={inputId} class="w-full py-3 px-4 outline-none" bind:value={value} type={showPassword ? 'text' : 'password'} {...rest} />
 
-
+		<button
+			type="button"
+			onclick={togglePassword}
+			class="absolute inset-y-0 end-0 z-20 cursor-pointer items-center rounded-e-md px-3 text-gray-400 dark:text-white focus:text-blue-600 focus:outline-none dark:focus:text-blue-500"
+			aria-label="Toggle password visibility"
+		>
+			<!-- eye / eye‑off icon -->
+			{#if showPassword}
+				<!-- eye‑off -->
+				<EyeSlash/>
+			{:else}
+				<!-- eye -->
+				<Eye/>
+			{/if}
+		</button>
+	</div>
+{:else}
+	<!-- Plain input -->
+	<input class={inputCls} id={inputId} bind:value={value} {...rest} />
+{/if}

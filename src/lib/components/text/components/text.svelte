@@ -1,7 +1,7 @@
 <script lang="ts">
 
     // --- Logic ---
-    import { cn } from '$lib/components/utils';
+    import { cn } from '$lib/utils';
     import type { Props } from "..";
     import { Text } from "sk-clib";
     
@@ -14,6 +14,7 @@
 
 
     // Setup Text's class
+    // svelte-ignore state_referenced_locally
     let textCls = $state(cn(textClass, className));
     $effect(() => {
         textCls = cn(textClass, className)

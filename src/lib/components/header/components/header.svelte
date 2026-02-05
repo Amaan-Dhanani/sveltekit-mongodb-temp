@@ -1,7 +1,7 @@
 <script lang="ts">
 
     // --- Logic ---
-    import { cn } from '$lib/components/utils';
+    import { cn } from '$lib/utils';
     import type { Props } from "..";
 	import { Header } from 'sk-clib';
     

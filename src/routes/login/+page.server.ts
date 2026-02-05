@@ -1,27 +1,36 @@
+import { superValidate } from "sveltekit-superforms/server";
+import { zod4 } from "sveltekit-superforms/adapters";
+import type { PageServerLoad } from "./$types";
 import { fail, redirect } from "@sveltejs/kit";
-import type { Actions } from "./$types";
+import { loginSchema } from "$lib/validation";
 import { login_user } from "$lib/server/login";
+import { setError } from "sveltekit-superforms/server";
 import { cookie_options } from "$lib/server/utils";
 
-export const actions: Actions = {
-	default: async (event) => {
-		const data = await event.request.formData();
+export const load: PageServerLoad = async () => {
+    const form = await superValidate(zod4(loginSchema));
+    return { form };
+}
 
-		const email = (data.get("email") as string)
-			?.toLowerCase()
-			?.trim();
-		const password = data.get("password") as string;
+export const actions = {
+    default: async (event) => {
+        const form = await superValidate(event, zod4(loginSchema));
 
-		const user_data = await login_user(email, password);
+        if (!form.valid) {
+            return fail(400, { form });
+        }
 
-		if ("error" in user_data) {
-			return fail(400, { email, error: user_data.error });
-		} else {
-			const { token, user } = user_data;
-			event.cookies.set("auth-token", token, cookie_options);
-			event.cookies.set("email", user.email, cookie_options);
-			event.cookies.set("name", user.name, cookie_options);
-			throw redirect(303, "/dashboard");
-		}
-	}
+        const { email, password } = form.data;
+        const result = await login_user(email, password);
+
+        if ("error" in result) {
+            setError(form, 'email', result.error);
+            return fail(400, { form });
+        }
+
+        event.cookies.set("auth-token", result.token, cookie_options);
+        event.cookies.set("email", result.user.email, cookie_options);
+        event.cookies.set("name", result.user.name, cookie_options);
+        throw redirect(303, "/dashboard");
+    }
 };

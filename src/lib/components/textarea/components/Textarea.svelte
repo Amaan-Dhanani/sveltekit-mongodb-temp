@@ -10,7 +10,7 @@
 -->
 
 <script lang="ts"> 
-	import { cn } from '$lib/components/utils';
+	import { cn } from '$lib/utils';
 	import type { Props } from "..";
 
 	let {

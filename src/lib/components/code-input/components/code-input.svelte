@@ -1,6 +1,8 @@
+<!-- svelte-ignore state_referenced_locally -->
 <script lang="ts">
+	
 	// --- Logic ---
-	import { cn } from '$lib/components/utils';
+	import { cn } from '$lib/utils';
 	import type { Props } from '..';
 	import { Flex, Frame } from 'sk-clib';
 

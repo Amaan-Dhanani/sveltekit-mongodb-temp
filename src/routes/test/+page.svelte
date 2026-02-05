@@ -1,4 +1,5 @@
-<script>
-	import Error from '$lib/components/error/components/error.svelte';
+<script lang="ts">
+    import { Error } from "$lib/components";
 </script>
-<Error/>
+
+<Error big error="This is a test error message" class="ee" />

@@ -1,25 +1,47 @@
-import { register_user } from "$lib/server/register";
+import { superValidate } from "sveltekit-superforms/server";
+import { zod4 } from "sveltekit-superforms/adapters";
+import type { PageServerLoad } from "./$types";
 import { fail, redirect } from "@sveltejs/kit";
-import type { Actions } from "./$types";
+import { create_user, verify_user } from "$lib/server/register";
+import { registerSchema } from "$lib/validation";
+import { setError } from "sveltekit-superforms/server";
 
-export const actions: Actions = {
-	default: async (event) => {
-		const data = await event.request.formData();
 
-		const email = (data.get("email") as string)
-			?.toLowerCase()
-			?.trim();
-		const password = data.get("password") as string;
-		const name = (data.get("name") as string)?.trim();
+export const load: PageServerLoad = async () => {
+	const form = await superValidate(zod4(registerSchema));
+	return { form };
+}
 
-		const user = { email, name };
+export const actions = {
+	register: async (event) => {
+		const form = await superValidate(event, zod4(registerSchema));
 
-		const { error } = await register_user(email, password, name);
+		if (!form.valid) {
+			return fail(400, { form });
+		}
+
+		const { email, password, name } = form.data;
+		const { error } = await create_user(email, password, name, event.cookies);
 
 		if (error) {
-			return fail(400, { user, error });
-		} else {
-			throw redirect(303, "/login");
+			setError(form, 'email', error);
+			return fail(400, { form });
 		}
+
+		//Returning result to render email in frontend.
+		return { form };
+	},
+
+	code: async (event) => {
+        const code = (await event.request.formData()).get("code") as string;
+        const { error, go_back_btn } = await verify_user(code, event.cookies);
+
+        if (error) {
+            return { error, go_back_btn };
+        }
+
+        throw redirect(303, "/login");
 	}
+
+
 };

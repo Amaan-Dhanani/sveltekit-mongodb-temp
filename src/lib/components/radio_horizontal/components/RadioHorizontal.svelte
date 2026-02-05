@@ -6,7 +6,7 @@
 	UPDATE - There are better updates that were made to this component in DriveHenrico repo
 -->
 <script lang="ts">
-	import { cn } from '$lib/components/utils';
+	import { cn } from '$lib/utils';
 
 	export let options: { label: string; value: string }[] = [];
 	export let name: string;

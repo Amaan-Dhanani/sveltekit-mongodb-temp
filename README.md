@@ -1,76 +1,96 @@
-# QuestOwl 
+<details>
+<summary>Start Database</summary>
+  
+  We will store our users in a MongoDB database. We will use [MongoDB Altas](https://mongodb.com/atlas) which is their cloud-based solution.
+  
+  Open your MongoDB dashboard and create a cluster (if you are unsure how that works, check out their tutorial). By clicking "Connect", you will get a URI of the form.
+  
+  Save the URI as an environment variable `SECRET_MONGODB_URI` in the `.env` file (located at the root of the project).
+  Also generate a JWT Secret and save it as an environment variable `SECRET_JWT_KEY` in the `.env` file.
+  
+  ```
+  SECRET_MONGODB_URI="mongodb+srv://{USER_NAME}:{USER_PASSWORD}@{CLUSTER_NAME}.mongodb.net/data?retryWrites=true&w=majority"
+  SECRET_JWT_KEY="{YOUR_RANDOMLY_GENERATED_JWT_SECRET}"
+  ```
+  
+  NOTE: You can replace `SECRET_MONGODB_URI` with any connection string format. The password needs to be URL encoded if needed! Notice that I have added `data` before the question mark. This will be the name of the database under which the user collection will be created. Otherwise, MongoDB will call it test by default.
+</details>
+
+
+<details>
+
+<summary>Protecting Routes</summary>
+ Our goal is to protect certain pages from non-authenticated users. Simply head to `hooks.server.ts` and find this section of code and add a directory!
  
-## Sources
->**MongoDB Altas + SvelteKit + TailwindCSS**
-
-## Packages 
-- TailwindCSS
-- MongoDB Altas
-- Components by npm package `sk-clib`, created by GitHub user `TreltaSev`
-
-## How to (components)
-
-### Input
->Go to `$lib/components/input/components/input.svelte` to see the component. TypeScript files are used in `$lib/components/input`. The props of the component are as follows: 
-> | Prop | Description | Example |
-> |-|-|-|
-> | `class` | Any other classes you want to add which will add on to the other classes that were used by default for styling. Overriding default classes work. | `ml-[45px]`
-> | `label` | Adds a `<label>` element above the input box. However, since the styling of this label cannot be customized, it's recommended to omit the `label` prop and instead use your own HTML text element if custom styling is needed. | `Name`|
-> 
-> Note that other HTML `input` attributes (such as `required` and `disabled`) are also props, and these props can override defaults.
-> Note the component needs access to `$lib/components/utils.ts`.
-
-### Navigation
->Go to `$lib/components/navigation/Navigation.svelte` to find the navbar.  Each icon is made by the `Icon` component, which is found in `$lib/components/navigation/components/Icon.svelte`. The props of the Icon component are as follows:
->| Prop | Description | Example |
->|-|-|-|
->| `text` | Label displayed below the icon; also known as the option name. | `Discord` |
->| `paths` | Basically all of html of the path tag inside the svg element. It is recommended to write the path by declaring in as a string in the typescript section of `Navigation.svelte` and not being placed directly within the component. Do not use the `stroke` attribute inside `paths` unless necessary, as there is a dedicated `stroke` prop. | `<path d="M10 10 L90 10 L90 90 L10 90 Z">` |
->|`viewbox`| Basically whatever is in the `viewbox` attribute of the svg element. | `0 0 24 24`|
->| `stroke` | Basically, if it works, the stroke value will try to prevent having to write a `stroke` attribute in `paths`. Supports all HTML colors. | `#2d52cd` |
->|`center` | If set to `true`, icon will be larger and styled differently to represent the most centered option for navigation. | `true`
->| `fill` | Fill color for the svg. Supports all HTML colors. |`#2d52cd`|
->|`link` | URL path the user will navigate to upon clicking the icon. | `/dashboard` |
-
-### Radio Horizontal/Category Select
->Go to `$lib/components/radio_horizontal/components/RadioHorizontal.svelte` to see the component. TypeScript files are used in `$lib/components/radio_horizontal`. 
->It is kind of hard to explain the props of this components, so I have a code sample:
-> ```html
-> <RadioHorizontal
-> 	name="access"
-> 	bind:selected={selected2}
-> 	options={[
-> 		{ label: 'Public', value: 'Public' },
-> 		{ label: 'Private', value: 'Private' }
-> 	]}
-> />
-> ```
->- The `name` prop can be used to reference the element, which is necessary during an HTML form. When a form is submitted, the `name` is used as the key in the key-value pair sent to the server.
-> - `bind:selected` tells Svelte to keep the value of the selected option in sync with a variable.  In this case, `{selected2}` is the variable being bound. When the user selects a new option, `selected2` updates automatically. The string in `selected2` indicates the default value and is declared in the TypeScript portion of the Svelte page (not the component itself.
-> - The `options` array defines the choices shown in the dropdown menu. Each object in the array has a `label` and a `value`.   `label` is the text displayed to the user.   `value`: This is the underlying value assigned when the option is selected.
-> Note the component needs access to `$lib/components/utils.ts`.
-### Textarea
->Go to `$lib/components/textarea/components/Textarea.svelte` to see the component. TypeScript files are used in `$lib/components/textarea`. The props of the component are as follows: 
-> | Prop | Description | Example |
-> |-|-|-|
-> | `class` | Any other classes you want to add which will add on to the other classes that were used by default for styling. Overriding default classes work. | `ml-[45px]`
-> | `cap` | Adds a cap to how many characters can be put, and will display the amounts of characters typed so far. the `maxlength` attribute is not recommended unless you want to add a cap without displaying the amount of characters.| `Name`|
-> 
-> Note that other HTML `textarea` attributes (such as `required` and `disabled`) are also props, and these props can override defaults.
-> Note the component needs access to `$lib/components/utils.ts`.
-
-## How to (server)
-### Protected Page 
->There are certain pages we want to restrict so users can only access them if they are logged in. For example, a dashboard showing user stats should not render properly unless the user is signed in. 
->To enforce this, these pages are "protected" when an unauthorized user tries to access them, they are automatically redirected to the login page.
->To implement this, open `src/hooks.server.ts` and locate the following code:
-> ```ts
-> const is_protected =
->   event.url.pathname.startsWith("/dashboard") ||
->   event.url.pathname.startsWith("/account") ||
->   event.url.pathname.startsWith("/create");
-> ```
-> Add any additional protected routes here by including more conditions with `||`.
+ ```ts
+ export const handle = async ({ event, resolve }) => {
+    const is_protected =
+		  event.url.pathname.startsWith('/dashboard') ||
+		  event.url.pathname.startsWith('/account')
+      //YOU CAN ADD MORE HERE
+```
+</details>
 
 
-# NOTE TO SELF, TALK ABOUT `tempquest_pass` and `get_user_id`!
+<details>
+
+<summary>TailwindCSS Colors / Custom Properties</summary>
+If you are using a color/properties too much and you want to organize them, especially when it involves a theme, go the `.css` file and the rest is self-explanatory!
+ 
+ ```css
+@theme {
+    --font-poppins: 'Poppins', sans-serif;
+    /* It works with fonts! */color
+
+    /* === COLORS === */
+      --color-backdrop: #1f1f39;
+    --color-backdrop-light: #f0f0f2;
+    --color-primary: #3d5cff;	
+    --color-secondary: #2f2f42;
+    --color-subheading: #b8d8d2;
+    /* Add as many as you want */
+}
+```
+</details>
+
+
+<details>
+<summary>Unplugin Icons</summary>
+
+This repository has `unplugin-icons`, which is a great `npm` package.
+Check them out [here](https://github.com/unplugin/unplugin-icons)!
+</details>
+
+<details>
+
+<summary>Packages and Their Uses</summary>
+
+| Package | Purpose / Description |
+|---------|---------------------|
+| `bcrypt` | Library for hashing passwords securely. Used to store user passwords safely in your database. |
+| `jsonwebtoken` | Library for creating and verifying JWT tokens. Essential for authentication and protecting routes. |
+| `mongoose` | ODM (Object Document Mapper) for MongoDB. Simplifies interacting with MongoDB using schemas and models. |
+| `nodemailer` | Library to send emails from Node.js. Useful for account verification, password reset, or notifications. |
+| `randomstring` | Library to generate random strings. Often used for temporary tokens, passwords, or unique identifiers. |
+| `sveltekit-superforms` | Library for building forms in SvelteKit with built-in validation, error handling, and easy integration with server actions. |
+| `sk-clib` | A component library for SvelteKit (custom library, likely providing pre-built UI components and utilities) created by github user TreltaSev. |
+| `tailwind-merge` | Utility to intelligently merge Tailwind CSS classes, avoiding duplicate or conflicting class names dynamically. |
+| `unplugin-icons` | Vite/Svelte plugin to use icons as components. Works with multiple icon packs like Iconify. |
+| `zod` | Type-safe schema validation library, often used with Superforms to define and validate form data. |
+
+If you use TypeScript, you will also want to install the types as a dev dependency for certain packages.
+
+  
+</details>
+
+
+
+
+
+
+
+
+
+
+
+

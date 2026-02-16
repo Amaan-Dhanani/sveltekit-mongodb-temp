@@ -2,7 +2,7 @@ import { superValidate } from "sveltekit-superforms/server";
 import { zod4 } from "sveltekit-superforms/adapters";
 import type { PageServerLoad } from "./$types";
 import { fail, redirect } from "@sveltejs/kit";
-import { create_request, verify_request } from "$lib/server/forget";
+import { create_request, verify_request } from "$lib/server/change";
 import { changeCredsSchema } from "$lib/validation";
 import { setError } from "sveltekit-superforms/server";
 
@@ -13,7 +13,7 @@ export const load: PageServerLoad = async () => {
 }
 
 export const actions = {
-    forget: async (event) => {
+    change: async (event) => {
         const form = await superValidate(event, zod4(changeCredsSchema));
 
         if (!form.valid) {

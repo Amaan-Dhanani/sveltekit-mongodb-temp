@@ -79,8 +79,8 @@ export async function create_request(
         await sendEmail({
             to: recipient,
             subject: 'Your verification code',
-            textPath: 'src/lib/nodemailer/forget.txt',
-            htmlPath: 'src/lib/nodemailer/forget.html',
+            textPath: 'src/lib/nodemailer/change.txt',
+            htmlPath: 'src/lib/nodemailer/change.html',
             data: { code: code.toString() }
         });
 

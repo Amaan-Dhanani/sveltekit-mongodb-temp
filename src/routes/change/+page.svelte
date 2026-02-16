@@ -41,7 +41,7 @@
 	<Frame flex col fill class="dark:bg-secondary mt-2 box-border rounded-t-2xl bg-white p-6">
 		<Flex row fill>
 			{#if !showSecondForm}
-				<form method="POST" action="?/forget" autocomplete="off" class="box-border flex size-full flex-col" use:formEnhance>
+				<form method="POST" action="?/change" autocomplete="off" class="box-border flex size-full flex-col" use:formEnhance>
 					<Dropdown.Menu class="mb-4">
 						<Dropdown.Trigger>
 							<Dropdown.Button class="rounded-md">{$form.type || 'Select an Option'}</Dropdown.Button>

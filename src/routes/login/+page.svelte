@@ -34,7 +34,7 @@
 				</Flex>
 				<Flex row center class="gap-2">
 					<Text lg class="opacity-80">Forgot Password?</Text>
-					<a href="/forget" class="text-primary font-bold underline">Click here</a>
+					<a href="/change" class="text-primary font-bold underline">Click here</a>
 				</Flex>
 			</form>
 

@@ -3,7 +3,7 @@
 	import type { Props } from '..';
 	import { cn } from '$lib/utils';
 
-	let { error, big, onclick, btnText, divClass = $bindable('flex justify-center'), class: className, }: Props = $props();
+	let { error, big, onclick, btnText, divClass = $bindable('w-full'), class: className, }: Props = $props();
 
 	// svelte-ignore state_referenced_locally
 		let divCls = $state(cn(divClass, className));
@@ -16,7 +16,7 @@
 	{#if big}
 		<!-- Big error layout -->
 		<div class={divCls}>
-			<div class="w-full max-w-[290px] overflow-hidden rounded-lg bg-white shadow-lg">
+			<div class="w-full mx-auto max-w-[290px] overflow-hidden rounded-lg bg-white shadow-lg">
 				<div class="p-5 text-center">
 					<div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
 						<RoundError class="h-6 w-6 text-red-600" />
@@ -26,7 +26,7 @@
 					<p class="mt-2 text-sm text-gray-500">{error}</p>
 
 					<button
-						class="mt-4 w-full rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm"
+						class="mt-4 w-full cursor-pointer rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm"
 						type="button" onclick={onclick}
 					>
 						{btnText}

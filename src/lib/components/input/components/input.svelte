@@ -1,4 +1,4 @@
- <!-- svelte-ignore state_referenced_locally -->
+<!-- svelte-ignore state_referenced_locally -->
 <script lang="ts">
 	import { cn } from '$lib/utils';
 	import type { Props } from '..';
@@ -15,7 +15,7 @@
 		labelClass = $bindable('text-[#858597] text-[14px]'),
 		classLabel = $bindable(''),
 		label = $bindable(undefined),
-        value = $bindable(undefined),
+		value = $bindable(undefined),
 		...rest
 	}: Props = $props();
 
@@ -36,18 +36,18 @@
 	}
 </script>
 
-{#if label !== undefined}
+{#if label !== undefined && type !== "hidden"}
 	<label class={labelCls} for={inputId}>{label}</label>
 {/if}
 
 {#if type === 'password'}
-	<div class={cn("relative !m-0 !p-0", inputCls)}>
-		<input id={inputId} class="w-full py-3 px-4 outline-none" bind:value={value} type={showPassword ? 'text' : 'password'} {...rest} />
+	<div class={cn(inputCls, 'relative p-0')}>
+		<input id={inputId} class="w-full px-4 py-3 outline-none" bind:value type={showPassword ? 'text' : 'password'} {...rest} />
 
 		<button
 			type="button"
 			onclick={togglePassword}
-			class="absolute inset-y-0 end-0 z-20 cursor-pointer items-center rounded-e-md px-3 text-gray-400 dark:text-white focus:text-blue-600 focus:outline-none dark:focus:text-blue-500"
+			class="absolute inset-y-0 end-0 z-20 cursor-pointer items-center rounded-e-md px-3 text-gray-400 focus:text-blue-600 focus:outline-none dark:text-white dark:focus:text-blue-500"
 			aria-label="Toggle password visibility"
 		>
 			<!-- eye / eye‑off icon -->
@@ -62,5 +62,5 @@
 	</div>
 {:else}
 	<!-- Plain input -->
-	<input class={inputCls} id={inputId} bind:value={value} {...rest} />
+	<input class={inputCls} type={type} id={inputId} bind:value {...rest} />
 {/if}

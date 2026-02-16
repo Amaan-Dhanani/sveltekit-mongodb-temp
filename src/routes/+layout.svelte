@@ -28,13 +28,13 @@
 	});
 </script>
 
-{#if pageName === '/dashboard'}
+{#if ['/dashboard'].includes(pageName)}
 	<div class="-z-10000 w-full bg-primary">
 		{@render children()}
 		<Speedial />
 	</div>
 
-{:else if pageName === '/login' || pageName === '/register' || pageName === '/test'}
+{:else if ['/login', '/register', '/test', '/forget'].includes(pageName)}
 	<Flex fill class="bg-backdrop-light dark:bg-backdrop overflow-y-auto">
 		<Frame flex col class="animate mx-auto w-full max-w-full sm:max-w-3/4 md:max-w-3/5 lg:max-w-3/4">
 			{@render children()}

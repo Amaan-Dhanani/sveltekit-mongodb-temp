@@ -5,14 +5,14 @@
 	import Logo from '$lib/images/Logo.png';
 	import { Speedial } from '$lib/components';
 	import { enhance } from '$app/forms';
-	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	import { superForm } from 'sveltekit-superforms/client';
 	import type { PageData, ActionData } from './$types';
 	import { registerSchema } from '$lib/validation';
 	import { zod4 } from 'sveltekit-superforms/adapters';
 
-	let { data, form: codeForm }: { data: PageData, form: ActionData } = $props();
+	let { data, form: codeForm }: { data: PageData; form: ActionData } = $props();
 
 	let showSecondForm = $state(false);
 	let returnedEmail = $state('');
@@ -41,19 +41,12 @@
 		<Flex row fill>
 			{#if !showSecondForm}
 				<form method="POST" action="?/register" autocomplete="off" class="box-border flex size-full flex-col" use:formEnhance>
-					<Frame class="mb-4">
-						<Input type="text" name="name" label="Name" bind:value={$form.name} />
-					</Frame>
-					<Frame class="mb-4">
-						<Input type="text" name="email" label="Email" bind:value={$form.email} />
-					</Frame>
-					<Frame class="mb-7">
-						<Input type="password" class="mb-[12px]" label="Password" name="password" bind:value={$form.password} />
-					</Frame>
+					<Input type="text" class="mb-4" name="name" label="Name" bind:value={$form.name} />
+					<Input type="text" class="mb-4" name="email" label="Email" bind:value={$form.email} />
+					<Input type="password" class="mb-7" label="Password" name="password" bind:value={$form.password} />
 
 					<Button class="bg-primary mb-4 h-12 w-full cursor-pointer rounded-xl text-white">Register</Button>
 
-					<!-- Sign In Link -->
 					<Flex row center class="gap-2">
 						<Text lg class="opacity-80">Already have an account?</Text>
 						<a href="/login" class="text-primary font-bold underline">Sign In</a>
@@ -74,21 +67,21 @@
 				</form>
 			{/if}
 
+			{#if codeForm?.go_back_btn}
+				<Error big error={codeForm?.error} onclick={() => goto('/')} btnText="Back to Home" class="" />
+			{/if}
+
 			<Frame class="mt-[8%] hidden lg:ml-4 lg:block lg:w-full">
 				<img src={Logo} alt="Logo" />
 			</Frame>
 		</Flex>
 
-		<!--Errors-->
 		<Error error={$errors.name} />
 		<Error error={$errors.email} />
 		<Error error={$errors.password} />
-		{#if codeForm?.go_back_btn}
-			<Error big error={codeForm?.error} class="" />
-		{:else}
+		{#if !codeForm?.go_back_btn}
 			<Error error={codeForm?.error} />
 		{/if}
-
 
 		<img src={Logo} alt="Logo" class="block w-full object-contain lg:hidden" />
 	</Frame>

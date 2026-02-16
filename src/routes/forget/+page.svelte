@@ -1,0 +1,114 @@
+<!-- svelte-ignore state_referenced_locally -->
+<script lang="ts">
+	import { Header, Text, Error, Input, CodeInput, Dropdown } from '$lib/components';
+	import { Flex, Frame, Button } from 'sk-clib';
+	import Logo from '$lib/images/Logo.png';
+	import { Speedial } from '$lib/components';
+	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
+
+	import { superForm } from 'sveltekit-superforms/client';
+	import type { PageData, ActionData } from './$types';
+	import { changeCredsSchema } from '$lib/validation';
+	import { zod4 } from 'sveltekit-superforms/adapters';
+
+	let { data, form: codeForm }: { data: PageData; form: ActionData } = $props();
+
+	let showSecondForm = $state(false);
+	let passwordInputLabel = $state('');
+	let whichEmail = $state('');
+	let newEmailType = $state('hidden');
+
+	const {
+		form,
+		enhance: formEnhance,
+		errors
+	} = superForm(data.form, {
+		validators: zod4(changeCredsSchema),
+		applyAction: false,
+		onResult({ result }) {
+			if (result.type === 'success' && result.data) {
+				showSecondForm = true;
+			}
+		}
+	});
+</script>
+
+<Flex col fill class="mt-20">
+	<Speedial />
+	<Header bold class="ml-4 !text-3xl sm:ml-0">Change Email or Password</Header>
+	<Text lg class="ml-4 opacity-80 sm:ml-0">Reset your password or update your account email settings below.</Text>
+	<Frame flex col fill class="dark:bg-secondary mt-2 box-border rounded-t-2xl bg-white p-6">
+		<Flex row fill>
+			{#if !showSecondForm}
+				<form method="POST" action="?/forget" autocomplete="off" class="box-border flex size-full flex-col" use:formEnhance>
+					<Dropdown.Menu class="mb-4">
+						<Dropdown.Trigger>
+							<Dropdown.Button class="rounded-md">{$form.type || 'Select an Option'}</Dropdown.Button>
+						</Dropdown.Trigger>
+						<Dropdown.Content>
+							<Dropdown.Button
+								onclick={() => {
+									$form.type = 'Change Email';
+									passwordInputLabel = '';
+									whichEmail = 'your new email address';
+									newEmailType = 'text';
+								}}>Change Email</Dropdown.Button
+							>
+							<Dropdown.Divider />
+							<Dropdown.Button
+								onclick={() => {
+									$form.type = 'Change Password';
+									passwordInputLabel = 'New ';
+									whichEmail = 'your email address';
+									newEmailType = 'hidden';
+								}}>Change Password</Dropdown.Button
+							>
+						</Dropdown.Content>
+					</Dropdown.Menu>
+					<Input type="hidden" name="type" bind:value={$form.type} />
+
+					<Input type="text" class="mb-4" name="email" label="Email" bind:value={$form.email} />
+					<Input type={newEmailType} class="mb-4" name="newEmail" label="New Email" bind:value={$form.newEmail} />
+					<Input type="password" class="mb-7" name="password" label={passwordInputLabel + 'Password'} bind:value={$form.password} />
+
+					<Button class="bg-primary mb-4 h-12 w-full cursor-pointer rounded-xl text-white">Continue</Button>
+
+					<Flex row center class="gap-2">
+						<a href="/" class="text-primary font-bold underline">Back to home</a>
+					</Flex>
+				</form>
+			{/if}
+
+			{#if showSecondForm && !codeForm?.go_back_btn}
+				<form method="POST" action="?/code" class="box-border flex size-full flex-col gap-4" use:enhance>
+					<Text bold class="text-center">Verify Code</Text>
+					<Text class="text-center text-sm">
+						We just emailed a verification code to {whichEmail}. Please check your inbox. If you don’t see it, check your spam folder. The code
+						expires in 10 minutes. If it expires, you will need to refresh the page and start the registration process again.
+					</Text>
+					<CodeInput classWrapper="pb-[3px]" name="code" />
+					<Button class="bg-primary mx-auto mb-4 h-10 w-fit cursor-pointer text-white">Verify</Button>
+				</form>
+			{/if}
+
+			{#if codeForm?.go_back_btn}
+				<Error big error={codeForm?.error} onclick={() => goto('/')} btnText="Back to Home" class="" />
+			{/if}
+
+			<Frame class="mt-[8%] hidden lg:ml-4 lg:block lg:w-full">
+				<img src={Logo} alt="Logo" />
+			</Frame>
+		</Flex>
+
+		<Error error={$errors.email} />
+		<Error error={$errors.newEmail} />
+		<Error error={$errors.type} />
+		<Error error={$errors.password} />
+		{#if !codeForm?.go_back_btn}
+			<Error error={codeForm?.error} />
+		{/if}
+
+		<img src={Logo} alt="Logo" class="block w-full object-contain lg:hidden" />
+	</Frame>
+</Flex>

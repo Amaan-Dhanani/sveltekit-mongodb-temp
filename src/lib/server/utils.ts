@@ -3,15 +3,6 @@ import fs from 'node:fs/promises';
 
 import { EMAIL_SMTP_PASS, EMAIL_SMTP_USER } from '$env/static/private';
 
-export interface LoginResponse {
-    token: string;
-    user: {
-        _id: string;
-        email: string;
-        name: string;
-    }
-}
-
 export const cookie_options = {
     httpOnly: true,
     secure: true,

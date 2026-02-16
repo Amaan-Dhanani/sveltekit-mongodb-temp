@@ -14,10 +14,10 @@ export async function create_user(
 ): Promise<{ error: string }> {
 
 	// Delete user if unverified
-	await User_Model.deleteOne({ email, code: { $exists: true } });
+	await User_Model.deleteOne({ email, verified: false });
 
 	// If a verified user exists, stop
-	const verifiedExists = await User_Model.exists({ email, code: { $exists: false } });
+	const verifiedExists = await User_Model.findOne({ email, verified: true });
 	if (verifiedExists) {
 		return { error: "A verified user with that email already exists. Try logging in instead." };
 	}
@@ -35,6 +35,7 @@ export async function create_user(
 		code,
 		ttl,
 		attempts: 0,
+		verified: false
 	});
 
 	try {
@@ -52,7 +53,7 @@ export async function create_user(
 		// Setting a cookie with JWT token to transfer email between actions. Server use only.
 		cookies.set(
 			"verify_email",
-			jwt.sign({ email }, SECRET_JWT_KEY ),
+			jwt.sign({ email }, SECRET_JWT_KEY),
 			{
 				httpOnly: true,
 				secure: true,
@@ -105,9 +106,11 @@ export async function verify_user(
 	// correct code, verify user, and delete temporary email cookie
 	await User_Model.updateOne(
 		{ _id: user._id },
-		{ $unset: { code: "", ttl: "", attempts: "" } }
+		{
+			$set: { verified: true },
+			$unset: { code: "", ttl: "", attempts: "" }
+		}
 	);
-
 	cookies.delete("verify_email", { path: "/" });
 
 	return { error: "", go_back_btn: false };

@@ -5,6 +5,7 @@
 <br>
 	REPLACE - This is a functional component but is horrible to look at
 -->
+	
 <script lang="ts">
 
 	export let text = '';

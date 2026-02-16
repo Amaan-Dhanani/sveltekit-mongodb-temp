@@ -1,9 +1,10 @@
 Hello {{name}},
 
-Your verification code is:
+Hi {{name}}, use the code to complete your registration:
 
 {{code}}
 
 This code will expire in 10 minutes.
 
-If you did not request this, you can safely ignore this email.
+You received this because an account was created using this email address. 
+If you didn't request this, you can safely ignore this message.

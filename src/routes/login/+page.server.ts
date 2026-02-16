@@ -21,16 +21,13 @@ export const actions = {
         }
 
         const { email, password } = form.data;
-        const result = await login_user(email, password);
+        const { error } = await login_user(email, password,  event.cookies);
 
-        if ("error" in result) {
-            setError(form, 'email', result.error);
-            return fail(400, { form });
-        }
+       if (error) {
+			setError(form, 'email', error);
+			return fail(400, { form });
+		}
 
-        event.cookies.set("auth-token", result.token, cookie_options);
-        event.cookies.set("email", result.user.email, cookie_options);
-        event.cookies.set("name", result.user.name, cookie_options);
         throw redirect(303, "/dashboard");
     }
 };

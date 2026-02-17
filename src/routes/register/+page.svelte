@@ -1,6 +1,5 @@
-<!-- svelte-ignore state_referenced_locally -->
 <script lang="ts">
-	import { Header, Text, Error, Input, TextRedactor, CodeInput } from '$lib/components';
+	import { Header, Text, Error, Input, TextRedactor, CodeInput, Dropdown } from '$lib/components';
 	import { Flex, Frame, Button } from 'sk-clib';
 	import Logo from '$lib/images/Logo.png';
 	import { Speedial } from '$lib/components';
@@ -37,11 +36,34 @@
 	<Speedial />
 	<Header bold class="ml-4 !text-3xl sm:ml-0">Sign Up</Header>
 	<Text lg class="ml-4 opacity-80 sm:ml-0">Enter your details below to start your journey!</Text>
-	<Frame flex col fill class="dark:bg-secondary mt-2 box-border rounded-t-2xl bg-white p-6">
+	<Flex col fill class="dark:bg-secondary mt-2 box-border rounded-t-2xl bg-white p-6">
 		<Flex row fill>
 			{#if !showSecondForm}
 				<form method="POST" action="?/register" autocomplete="off" class="box-border flex size-full flex-col" use:formEnhance>
 					<Input type="text" class="mb-4" name="name" label="Name" bind:value={$form.name} />
+
+					<!--this hex code (#858597) is only used like twice so it dont matter-->
+					<Text class="!text-[#858597] !text-[14px]">Type</Text>
+					<Dropdown.Menu class="mb-4">
+						<Dropdown.Trigger>
+							<Dropdown.Button class="rounded-lg">{$form.type || 'Select an Option'}</Dropdown.Button>
+						</Dropdown.Trigger>
+						<Dropdown.Content>
+							<Dropdown.Button
+								onclick={() => {
+									$form.type = 'Account Type 1';
+								}}>Account Type 1</Dropdown.Button
+							>
+							<Dropdown.Divider />
+							<Dropdown.Button
+								onclick={() => {
+									$form.type = 'Account Type 2';
+								}}>Account Type 2</Dropdown.Button
+							>
+						</Dropdown.Content>
+					</Dropdown.Menu>
+					<Input type="hidden" name="type" bind:value={$form.type} />
+
 					<Input type="text" class="mb-4" name="email" label="Email" bind:value={$form.email} />
 					<Input type="password" class="mb-7" label="Password" name="password" bind:value={$form.password} />
 
@@ -76,13 +98,13 @@
 			</Frame>
 		</Flex>
 
-		<Error error={$errors.name} />
-		<Error error={$errors.email} />
-		<Error error={$errors.password} />
+		<Error duration={3000} error={$errors.name} />
+		<Error duration={3000} error={$errors.email} />
+		<Error duration={3000} error={$errors.password} />
 		{#if !codeForm?.go_back_btn}
-			<Error error={codeForm?.error} />
+			<Error duration={3000} error={codeForm?.error} />
 		{/if}
 
 		<img src={Logo} alt="Logo" class="block w-full object-contain lg:hidden" />
-	</Frame>
+	</Flex>
 </Flex>

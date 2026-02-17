@@ -4,5 +4,5 @@ Use the code below to complete your request:
 
 This code will expire in 10 minutes.
 
-You are receiving this email because a email or password change was requested for your account.
+You are receiving this email because a request was made to modify or delete your account.
 If you didn't request this, you can safely ignore this message.

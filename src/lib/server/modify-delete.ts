@@ -4,6 +4,8 @@ import type { Cookies } from "@sveltejs/kit";
 import { ChangeCreds_Model, User_Model } from "./models";
 import jwt from "jsonwebtoken";
 import { SECRET_JWT_KEY } from "$env/static/private";
+import { deleteUser } from "./deleteUser";
+import { redirect } from "@sveltejs/kit";
 
 
 export async function create_request(
@@ -54,6 +56,10 @@ export async function create_request(
         if (emailTaken) return { error: 'This email is already in use by another account.' };
         password = ''; //Don't need it anymore
     }
+    else if (type === 'Delete Account') {
+         const passwordCorrect = await bcrypt.compare(password, user.password);
+         if (!passwordCorrect) return { error: "Password is not correct." };
+    }
     else {
         return { error: 'Invalid request type.' };
     }
@@ -79,8 +85,8 @@ export async function create_request(
         await sendEmail({
             to: recipient,
             subject: 'Your verification code',
-            textPath: 'src/lib/nodemailer/change.txt',
-            htmlPath: 'src/lib/nodemailer/change.html',
+            textPath: 'src/lib/nodemailer/modify-delete.txt',
+            htmlPath: 'src/lib/nodemailer/modify-delete.html',
             data: { code: code.toString() }
         });
 
@@ -142,9 +148,10 @@ export async function verify_request(
     else if (request.type === 'Change Email') {
         await User_Model.updateOne({ email }, { $set: { email: request.newEmail } });
     }
+    else if (request.type === 'Delete Account') {
+         deleteUser(email);
+    }
 
     await ChangeCreds_Model.deleteOne({ _id: request._id });
-    cookies.delete("verify_email", { path: "/" });
-
-    return { error: "", go_back_btn: false };
+    throw redirect(303, '/logout');
 }

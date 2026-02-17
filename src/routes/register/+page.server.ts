@@ -20,8 +20,8 @@ export const actions = {
 			return fail(400, { form });
 		}
 
-		const { email, password, name } = form.data;
-		const { error } = await create_user(email, password, name, event.cookies);
+		const { email, type, password, name } = form.data;
+		const { error } = await create_user(email, type, password, name, event.cookies);
 
 		if (error) {
 			setError(form, 'email', error);

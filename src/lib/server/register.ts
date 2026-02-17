@@ -8,6 +8,7 @@ import { SECRET_JWT_KEY } from "$env/static/private";
 
 export async function create_user(
 	email: string,
+	type: string,
 	password: string,
 	name: string,
 	cookies: Cookies
@@ -30,6 +31,7 @@ export async function create_user(
 
 	const user = new User_Model({
 		email,
+		type,
 		password: hashed_password,
 		name,
 		code,

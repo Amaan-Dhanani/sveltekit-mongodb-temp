@@ -1,12 +1,7 @@
 import { redirect } from "@sveltejs/kit";
-import type { Actions } from "./$types";
+import type { PageServerLoad } from "./$types";
 
-export const actions: Actions = {
-	default: async (event) => {
-		const cookieOptions = { path: '/' }; // Ensure cookies are removed from root path
-		event.cookies.delete("auth-token", cookieOptions);
-		event.cookies.delete("email", cookieOptions);
-		event.cookies.delete("name", cookieOptions);
+export const load: PageServerLoad = async ({ cookies }) => {
+		cookies.delete("auth-token", { path: '/' });
 		throw redirect(301, "/");
-	}
 };

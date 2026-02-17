@@ -9,7 +9,8 @@ export { default as Header } from './header/components/header.svelte';
 export { default as Text } from './text/components/text.svelte';
 export { default as TextRedactor } from './text-redactor/components/text-redactor.svelte';
 export { default as CodeInput } from './code-input/components/code-input.svelte';
-export { default as Error } from './error/components/error.svelte'
+export { default as Error } from './error/components/error.svelte';
+export { default as Success } from './success/components/success.svelte';
 
 // Hierarchy Export
 export * as Dropdown from "./dropdown";

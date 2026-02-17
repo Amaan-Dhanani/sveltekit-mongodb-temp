@@ -1,25 +1,25 @@
 <script lang="ts">
+	import { Flex, Button } from 'sk-clib';
+	import { Header, Text, Error } from '$lib/components';
+	import Logo from '$lib/images/Logo.png';
 	import type { PageData } from './$types';
-	export let data: PageData;
-	import { Navigation } from '$lib/components';
+	let { data }: { data: PageData } = $props();
+	import { goto } from '$app/navigation';
 </script>
 
-<!-- Full screen container -->
-<div class="bg-primary fixed inset-0 -z-[100] mt-[100vh] h-[300vh] w-screen overflow-hidden"></div>
-<div class="bg-primary mr-[1rem] ml-[1rem] flex min-h-screen flex-col">
-	<!-- Header -->
-	<h1 class="mb-0 ml-[5px] pt-[86px] text-[32px] font-bold text-white">Hi, {data.name.split(' ')[0]}</h1>
-	<p class="mt-0 mb-[10px] ml-[5px] text-[14px] text-white">Welcome back to QuestOwl!</p>
-	<!-- Form Section -->
-	<div class="dark:bg-secondary mb-[95px] box-border flex flex-grow flex-col gap-4 rounded-t-2xl bg-white px-6 py-8">
-		<div class="gap-0 dark:text-white">
-			<div class="dark:bg-secondary box-border flex flex-grow flex-col rounded-t-2xl bg-white px-6 py-8">
-				<button class="bg-primary mt-[20px] h-12 w-full rounded-xl text-center text-white hover:cursor-pointer"> My Quests </button>
-				<button class="bg-primary mt-[20px] h-12 w-full rounded-xl text-center text-white hover:cursor-pointer"> My Classes </button>
-				<button class="bg-primary mt-[20px] h-12 w-full rounded-xl text-center text-white hover:cursor-pointer"> Quest Library </button>
-				<button class="bg-primary mt-[20px] h-12 w-full rounded-xl text-center text-white hover:cursor-pointer"> Notifications </button>
-			</div>
-		</div>
-	</div>
-	<Navigation />
-</div>
+<Flex col fill class="mt-20">
+	<Header bold class="ml-4 !text-3xl sm:ml-0">{data.greeting}</Header>
+	<Text lg class="ml-4 opacity-80 sm:ml-0">Here is your dashboard!</Text>
+	<Flex col fill class="dark:bg-secondary mt-2 box-border gap-4 rounded-t-2xl bg-white p-6">
+		<Text>
+			I am a mostly empty dashboard. This is placeholder text.<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+			labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+			aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</Text>
+		<Button onclick={() => goto('/settings')} class="bg-primary h-12 w-full cursor-pointer rounded-xl text-white">Settings</Button>
+		<Button onclick={() => goto('/logout')} class="bg-red-500 mb-4 h-12 w-full cursor-pointer rounded-xl text-white">Logout</Button>
+		<img src={Logo} alt="Logo" class="mx-[5%] block object-contain" />
+		<Error duration={3000} error={data.error} />
+	</Flex>
+</Flex>

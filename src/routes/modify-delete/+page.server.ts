@@ -2,19 +2,19 @@ import { superValidate } from "sveltekit-superforms/server";
 import { zod4 } from "sveltekit-superforms/adapters";
 import type { PageServerLoad } from "./$types";
 import { fail, redirect } from "@sveltejs/kit";
-import { create_request, verify_request } from "$lib/server/change";
-import { changeCredsSchema } from "$lib/validation";
+import { create_request, verify_request } from "$lib/server/modify-delete";
+import { modifyDeleteSchema } from "$lib/validation";
 import { setError } from "sveltekit-superforms/server";
 
 
 export const load: PageServerLoad = async () => {
-    const form = await superValidate(zod4(changeCredsSchema));
+    const form = await superValidate(zod4(modifyDeleteSchema));
     return { form };
 }
 
 export const actions = {
-    change: async (event) => {
-        const form = await superValidate(event, zod4(changeCredsSchema));
+    modifyDelete: async (event) => {
+        const form = await superValidate(event, zod4(modifyDeleteSchema));
 
         if (!form.valid) {
             return fail(400, { form });

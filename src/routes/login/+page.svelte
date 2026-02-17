@@ -11,7 +11,6 @@
 
 	let { data }: { data: PageData } = $props();
 
-	// svelte-ignore state_referenced_locally
 	const { form, enhance, errors } = superForm(data?.form, {
 		validators: zod4(loginSchema),
 	});
@@ -20,7 +19,7 @@
 <Flex col fill class="mt-20">
 	<Header bold class="ml-4 !text-3xl sm:ml-0">Sign In</Header>
 	<Text lg class="ml-4 opacity-80 sm:ml-0">Welcome Back!</Text>
-	<Frame flex col fill class="dark:bg-secondary mt-2 box-border rounded-t-2xl bg-white p-6">
+	<Flex col fill class="dark:bg-secondary mt-2 box-border rounded-t-2xl bg-white p-6">
 		<Flex row fill>
 			<form method="POST" autocomplete="off" use:enhance class="box-border flex w-full flex-col">
 				<Input type="text" class="mb-4" name="email" label="Email" bind:value={$form.email} />
@@ -33,8 +32,8 @@
 					<a href="/register" class="text-primary font-bold underline">Sign Up</a>
 				</Flex>
 				<Flex row center class="gap-2">
-					<Text lg class="opacity-80">Forgot Password?</Text>
-					<a href="/change" class="text-primary font-bold underline">Click here</a>
+					<Text lg class="opacity-80">Wanna change your login credentials or delete your account?</Text>
+					<a href="/modify-delete" class="text-primary font-bold underline">Click here</a>
 				</Flex>
 			</form>
 
@@ -43,8 +42,8 @@
 			</Frame>
 		</Flex>
 
-		<Error error={$errors.email}/>
-		<Error error={$errors.password}/>
+		<Error duration={3000} error={$errors.email}/>
+		<Error duration={3000} error={$errors.password}/>
 		<img src={Logo} alt="Logo" class="block w-full object-contain lg:hidden" />
-	</Frame>
+	</Flex>
 </Flex>

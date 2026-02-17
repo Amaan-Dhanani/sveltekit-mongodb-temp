@@ -1,11 +1,11 @@
 <script lang="ts">
-	import RoundError from '~icons/ic/round-error';
+	import RoundSuccess from '~icons/ic/baseline-check-circle';
 	import type { Props } from '..';
 	import { cn } from '$lib/utils';
 	import { fade } from 'svelte/transition'; // Added for smooth "fade"
 
 	let { 
-		error = $bindable(), 
+		success = $bindable(), 
 		big, 
 		onclick, 
 		btnText, 
@@ -20,11 +20,11 @@
 		divCls = cn(divClass, className);
 	});
 
-	// Only runs if error is present AND duration is provided
+	// Only runs if success is present AND duration is provided
 	$effect(() => {
-		if (error && duration && duration > 0) {
+		if (success && duration && duration > 0) {
 			const timer = setTimeout(() => {
-				error = ""; 
+				success = ""; 
 			}, duration);
 
 			return () => clearTimeout(timer);
@@ -32,20 +32,20 @@
 	});
 </script>
 
-{#if error}
+{#if success}
 	<!-- transition:fade makes it disappear smoothly -->
 	<div transition:fade={{ duration: 500 }}>
 		{#if big}
 			<div class={divCls}>
 				<div class="w-full mx-auto max-w-[290px] overflow-hidden rounded-lg bg-white shadow-lg">
 					<div class="p-5 text-center">
-						<div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
-							<RoundError class="h-6 w-6 text-red-600" />
+						<div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-teal-100">
+							<RoundSuccess class="h-6 w-6 text-teal-600" />
 						</div>
-						<h3 class="mt-3 text-base font-semibold text-gray-900">Oops, this sucks!</h3>
-						<p class="mt-2 text-sm text-gray-500">{error}</p>
+						<h3 class="mt-3 text-base font-semibold text-gray-900">Yay, you did it!</h3>
+						<p class="mt-2 text-sm text-gray-500">{success}</p>
 						{#if btnText}
-							<button class="mt-4 w-full cursor-pointer rounded-md bg-red-600 px-4 py-2 text-base font-medium text-white" onclick={onclick}>
+							<button class="mt-4 w-full cursor-pointer rounded-md bg-teal-600 px-4 py-2 text-base font-medium text-white" onclick={onclick}>
 								{btnText}
 							</button>
 						{/if}
@@ -53,9 +53,9 @@
 				</div>
 			</div>
 		{:else}
-			<div class="relative flex items-center gap-2 rounded-lg border border-red-400 bg-red-100 px-2 py-1 text-[12px] text-red-700">
-				<RoundError class="inline h-[16px] w-[16px]" />
-				{error}
+			<div class="relative flex items-center gap-2 rounded-lg border border-teal-400 bg-teal-100 px-2 py-1 text-[12px] text-teal-700">
+				<RoundSuccess class="inline h-[16px] w-[16px]" />
+				{success}
 			</div>
 		{/if}
 	</div>

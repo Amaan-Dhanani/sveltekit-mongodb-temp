@@ -12,13 +12,14 @@ const passwordRequirements = z.string().superRefine((val, ctx) => {
         const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
         ctx.addIssue({
             code: "custom", // Use a simple string instead of the deprecated enum
-            message: `Your password is a bit weak. It needs ${formatter.format(issues)}.`
+            message: `Your password needs ${formatter.format(issues)}.`
         });
     }
 });
 
 export const registerSchema = z.object({
     name: z.string().min(2, "Name has to be at least 2 characters."),
+    type: z.string().min(1, 'Please select an option from the dropdown.'),
     email: z.email('Please enter a valid email.'),
     password: passwordRequirements
 });
@@ -28,7 +29,7 @@ export const loginSchema = z.object({
     password: z.string().min(1, "Password is required.")
 });
 
-export const changeCredsSchema = z.object({
+export const modifyDeleteSchema = z.object({
     email: z.email('Please enter a valid email.'),
     newEmail: z.email().optional(),
     type: z.string().min(1, 'Please select an option from the dropdown.'),

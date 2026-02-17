@@ -1,4 +1,3 @@
-<!-- svelte-ignore state_referenced_locally -->
 <script lang="ts">
 	import { cn } from '$lib/utils';
 	import type { Props } from '..';

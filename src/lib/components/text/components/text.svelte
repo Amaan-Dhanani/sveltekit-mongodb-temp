@@ -14,7 +14,6 @@
 
 
     // Setup Text's class
-    // svelte-ignore state_referenced_locally
     let textCls = $state(cn(textClass, className));
     $effect(() => {
         textCls = cn(textClass, className)

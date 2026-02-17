@@ -12,7 +12,7 @@
 	import { onMount } from 'svelte';
 	import { global_mode$ } from '$lib/components/lightdark/mode';
 	import Speedial from '$lib/components/speedial/speedial.svelte';
-	import { Flex, Frame } from 'sk-clib';
+	import { Flex } from 'sk-clib';
 	let { children } = $props();
 
 	// THEME
@@ -28,17 +28,20 @@
 	});
 </script>
 
-{#if ['/dashboard'].includes(pageName)}
-	<div class="-z-10000 w-full bg-primary">
-		{@render children()}
-		<Speedial />
-	</div>
-
-{:else if ['/login', '/register', '/test', '/change'].includes(pageName)}
-	<Flex fill class="bg-backdrop-light dark:bg-backdrop overflow-y-auto">
-		<Frame flex col class="animate mx-auto w-full max-w-full sm:max-w-3/4 md:max-w-3/5 lg:max-w-3/4">
+{#if ['/dashboard', '/settings'].includes(pageName)}
+	<Flex fill class="bg-primary overflow-y-auto">
+		<Flex col class="animate mx-auto w-full max-w-full sm:max-w-3/4 md:max-w-3/5 lg:max-w-3/4">
 			{@render children()}
-		</Frame>
+			<Speedial />
+		</Flex>
+	</Flex>
+
+{:else if ['/login', '/register', '/test', '/modify-delete', '/', '/logout'].includes(pageName)}
+	<Flex fill class="bg-backdrop-light dark:bg-backdrop overflow-y-auto">
+		<Flex col class="animate mx-auto w-full max-w-full sm:max-w-3/4 md:max-w-3/5 lg:max-w-3/4">
+			{@render children()}
+			<Speedial />
+		</Flex>
 	</Flex>
 
 {:else}

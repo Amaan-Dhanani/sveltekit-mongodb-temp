@@ -26,7 +26,7 @@
  export const handle = async ({ event, resolve }) => {
     const is_protected =
 		  event.url.pathname.startsWith('/dashboard') ||
-		  event.url.pathname.startsWith('/account')
+		  event.url.pathname.startsWith('/settings')
       //YOU CAN ADD MORE HERE
 ```
 </details>
@@ -34,16 +34,17 @@
 
 <details>
 
-<summary>TailwindCSS Colors / Custom Properties</summary>
+<summary>TailwindCSS Custom Properties & Theme</summary>
+
 If you are using a color/properties too much and you want to organize them, especially when it involves a theme, go the `.css` file and the rest is self-explanatory!
  
  ```css
 @theme {
     --font-poppins: 'Poppins', sans-serif;
-    /* It works with fonts! */color
+    /* It works with fonts! */
 
     /* === COLORS === */
-      --color-backdrop: #1f1f39;
+    --color-backdrop: #1f1f39;
     --color-backdrop-light: #f0f0f2;
     --color-primary: #3d5cff;	
     --color-secondary: #2f2f42;
@@ -51,14 +52,8 @@ If you are using a color/properties too much and you want to organize them, espe
     /* Add as many as you want */
 }
 ```
-</details>
 
-
-<details>
-<summary>Unplugin Icons</summary>
-
-This repository has `unplugin-icons`, which is a great `npm` package.
-Check them out [here](https://github.com/unplugin/unplugin-icons)!
+Theme rendering can be seen in the `+layout.svelte` of the project!
 </details>
 
 <details>
@@ -70,18 +65,18 @@ Check them out [here](https://github.com/unplugin/unplugin-icons)!
 | `bcrypt` | Library for hashing passwords securely. Used to store user passwords safely in your database. |
 | `jsonwebtoken` | Library for creating and verifying JWT tokens. Essential for authentication and protecting routes. |
 | `mongoose` | ODM (Object Document Mapper) for MongoDB. Simplifies interacting with MongoDB using schemas and models. |
-| `nodemailer` | Library to send emails from Node.js. Useful for account verification, password reset, or notifications. |
-| `randomstring` | Library to generate random strings. Often used for temporary tokens, passwords, or unique identifiers. |
-| `sveltekit-superforms` | Library for building forms in SvelteKit with built-in validation, error handling, and easy integration with server actions. |
+| `nodemailer` | Library to send emails from Node.js. Useful for account verification, password reset, or notifications. When sending emails with HTML, note that rendering may be weird. Make sure to have a .txt template and a .html template for best practice. Template are located at `src/lib/nodemailer`. |
+| `prettier` | An opinionated code formatter that enforces a consistent style across your entire codebase. |
+| `sveltekit-superforms` | Library for building forms in SvelteKit with built-in validation, error handling, and easy integration with server actions.  https://www.youtube.com/watch?v=MiKzH3kcVfs%20<br>https://superforms.rocks/ |
 | `sk-clib` | A component library for SvelteKit (custom library, likely providing pre-built UI components and utilities) created by github user TreltaSev. |
 | `tailwind-merge` | Utility to intelligently merge Tailwind CSS classes, avoiding duplicate or conflicting class names dynamically. |
 | `unplugin-icons` | Vite/Svelte plugin to use icons as components. Works with multiple icon packs like Iconify. |
-| `zod` | Type-safe schema validation library, often used with Superforms to define and validate form data. |
+| `zod` | Type-safe schema validation library, often used with Superforms to define and validate form data. Validation schemas are located at `src/lib/validation`. |
 
 If you use TypeScript, you will also want to install the types as a dev dependency for certain packages.
 
-  
 </details>
+
 
 
 

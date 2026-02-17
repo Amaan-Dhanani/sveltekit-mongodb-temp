@@ -1,4 +1,3 @@
-<!-- svelte-ignore state_referenced_locally -->
 <script lang="ts">
 	import { Header, Text, Error, Input, CodeInput, Dropdown } from '$lib/components';
 	import { Flex, Frame, Button } from 'sk-clib';
@@ -9,7 +8,7 @@
 
 	import { superForm } from 'sveltekit-superforms/client';
 	import type { PageData, ActionData } from './$types';
-	import { changeCredsSchema } from '$lib/validation';
+	import { modifyDeleteSchema } from '$lib/validation';
 	import { zod4 } from 'sveltekit-superforms/adapters';
 
 	let { data, form: codeForm }: { data: PageData; form: ActionData } = $props();
@@ -18,13 +17,14 @@
 	let passwordInputLabel = $state('');
 	let whichEmail = $state('');
 	let newEmailType = $state('hidden');
+	let additionalText = $state('');
 
 	const {
 		form,
 		enhance: formEnhance,
 		errors
 	} = superForm(data.form, {
-		validators: zod4(changeCredsSchema),
+		validators: zod4(modifyDeleteSchema),
 		applyAction: false,
 		onResult({ result }) {
 			if (result.type === 'success' && result.data) {
@@ -38,13 +38,16 @@
 	<Speedial />
 	<Header bold class="ml-4 !text-3xl sm:ml-0">Change Email or Password</Header>
 	<Text lg class="ml-4 opacity-80 sm:ml-0">Reset your password or update your account email settings below.</Text>
-	<Frame flex col fill class="dark:bg-secondary mt-2 box-border rounded-t-2xl bg-white p-6">
+	<Flex col fill class="dark:bg-secondary mt-2 box-border rounded-t-2xl bg-white p-6">
 		<Flex row fill>
 			{#if !showSecondForm}
-				<form method="POST" action="?/change" autocomplete="off" class="box-border flex size-full flex-col" use:formEnhance>
+				<form method="POST" action="?/modifyDelete" autocomplete="off" class="box-border flex size-full flex-col" use:formEnhance>
+
+					<!--this hex code (#858597) is only used like twice so it don't matter-->
+					<Text class="!text-[#858597] !text-[14px]">Action</Text>
 					<Dropdown.Menu class="mb-4">
 						<Dropdown.Trigger>
-							<Dropdown.Button class="rounded-md">{$form.type || 'Select an Option'}</Dropdown.Button>
+							<Dropdown.Button class="rounded-lg">{$form.type || 'Select an Option'}</Dropdown.Button>
 						</Dropdown.Trigger>
 						<Dropdown.Content>
 							<Dropdown.Button
@@ -53,6 +56,8 @@
 									passwordInputLabel = '';
 									whichEmail = 'your new email address';
 									newEmailType = 'text';
+									additionalText = 'you are changing your email address';
+
 								}}>Change Email</Dropdown.Button
 							>
 							<Dropdown.Divider />
@@ -62,7 +67,18 @@
 									passwordInputLabel = 'New ';
 									whichEmail = 'your email address';
 									newEmailType = 'hidden';
+									additionalText = 'you are changing your password';
 								}}>Change Password</Dropdown.Button
+							>
+							<Dropdown.Divider />
+							<Dropdown.Button
+								onclick={() => {
+									$form.type = 'Delete Account';
+									passwordInputLabel = '';
+									whichEmail = 'your email address';
+									newEmailType = 'hidden';
+									additionalText = 'you are deleting your account';
+								}}>Delete Account</Dropdown.Button
 							>
 						</Dropdown.Content>
 					</Dropdown.Menu>
@@ -87,6 +103,9 @@
 						We just emailed a verification code to {whichEmail}. Please check your inbox. If you don’t see it, check your spam folder. The code
 						expires in 10 minutes. If it expires, you will need to refresh the page and start the registration process again.
 					</Text>
+					<Text class="text-center text-sm">
+						By entering this code, {additionalText}!
+					</Text>
 					<CodeInput classWrapper="pb-[3px]" name="code" />
 					<Button class="bg-primary mx-auto mb-4 h-10 w-fit cursor-pointer text-white">Verify</Button>
 				</form>
@@ -101,14 +120,14 @@
 			</Frame>
 		</Flex>
 
-		<Error error={$errors.email} />
-		<Error error={$errors.newEmail} />
-		<Error error={$errors.type} />
-		<Error error={$errors.password} />
+		<Error duration={3000} error={$errors.email} />
+		<Error duration={3000} error={$errors.newEmail} />
+		<Error duration={3000} error={$errors.type} />
+		<Error duration={3000} error={$errors.password} />
 		{#if !codeForm?.go_back_btn}
-			<Error error={codeForm?.error} />
+			<Error duration={3000} error={codeForm?.error} />
 		{/if}
 
 		<img src={Logo} alt="Logo" class="block w-full object-contain lg:hidden" />
-	</Frame>
+	</Flex>
 </Flex>

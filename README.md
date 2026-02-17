@@ -62,6 +62,7 @@ Theme rendering can be seen in the `+layout.svelte` of the project!
 
 | Package | Purpose / Description |
 |---------|---------------------|
+| `@sveltejs/adapter-vercel` | An official SvelteKit adapter that converts your project into a format optimized for the Vercel platform. Used in `svelte.config.js`. Create new project in Vercel, enter environment variables, and import GitHub repository! |
 | `bcrypt` | Library for hashing passwords securely. Used to store user passwords safely in your database. |
 | `jsonwebtoken` | Library for creating and verifying JWT tokens. Essential for authentication and protecting routes. |
 | `mongoose` | ODM (Object Document Mapper) for MongoDB. Simplifies interacting with MongoDB using schemas and models. |

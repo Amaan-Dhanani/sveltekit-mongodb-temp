@@ -37,7 +37,7 @@
 <Flex col fill class="mt-20">
 	<Speedial />
 	<Header bold class="ml-4 !text-3xl sm:ml-0">Modify or Delete Account</Header>
-	<Text lg class="ml-4 opacity-80 sm:ml-0">Reset your password or update your account email settings below.</Text>
+	<Text lg class="ml-4 opacity-80 sm:ml-0">Reset your email/password or delete your account all right here!</Text>
 	<Flex col fill class="dark:bg-secondary mt-2 box-border rounded-t-2xl bg-white p-6">
 		<Flex row fill>
 			{#if !showSecondForm}

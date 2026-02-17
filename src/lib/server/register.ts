@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
 import { generate_code_and_ttl, sendEmail } from "./utils";
+import path from 'node:path';
 import type { Cookies } from "@sveltejs/kit";
 import { User_Model } from "./models";
 import jwt from "jsonwebtoken";
 import { SECRET_JWT_KEY } from "$env/static/private";
-import { base } from '$app/paths';
 
 
 export async function create_user(
@@ -45,11 +45,12 @@ export async function create_user(
 		await user.save();
 
 		// Don't block user creation on email
+		 const staticDir = path.resolve(process.cwd(), 'static');
 		sendEmail({
 			to: email,
 			subject: 'Hello {{name}}, your verification code',
-			textPath: 'static/register.txt',
-			htmlPath: 'static/register.html',
+			 textPath: path.join(staticDir, 'register.txt'),
+       		 htmlPath: path.join(staticDir, 'register.html'),
 			data: { name, code: code.toString() }
 		}).catch(console.error);
 

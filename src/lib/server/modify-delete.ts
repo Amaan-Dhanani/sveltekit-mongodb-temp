@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import { generate_code_and_ttl, sendEmail } from "./utils";
+import path from 'node:path';
 import type { Cookies } from "@sveltejs/kit";
 import { ChangeCreds_Model, User_Model } from "./models";
 import jwt from "jsonwebtoken";
@@ -82,11 +83,12 @@ export async function create_request(
         // If changing email, send code to the NEW email to verify ownership
         const recipient = type === 'Change Email' ? (newEmail ?? '') : email;
 
+        const staticDir = path.resolve(process.cwd(), 'static');
         await sendEmail({
             to: recipient,
             subject: 'Your verification code',
-            textPath: 'static/modify-delete.txt',
-            htmlPath: 'static/modify-delete.html',
+            textPath: path.join(staticDir, 'modify-delete.txt'),
+            htmlPath: path.join(staticDir, 'modify-delete.html'),
             data: { code: code.toString() }
         });
 
@@ -120,7 +122,6 @@ export async function verify_request(
     }
 
     const request = await ChangeCreds_Model.findOne({ email });
-    const user = await User_Model.findOne({ email });
     if (!request) return { error: "Your code probably expired. Please try again.", go_back_btn: true };
 
     if (request.code !== code) {

@@ -1,12 +1,15 @@
 import bcrypt from "bcrypt";
 import { generate_code_and_ttl, sendEmail } from "./utils";
-import path from 'node:path';
+import { read } from '$app/server';
 import type { Cookies } from "@sveltejs/kit";
 import { ChangeCreds_Model, User_Model } from "./models";
 import jwt from "jsonwebtoken";
 import { SECRET_JWT_KEY } from "$env/static/private";
 import { deleteUser } from "./deleteUser";
 import { redirect } from "@sveltejs/kit";
+
+import textTemplate from '$lib/nodemailer/modify-delete.txt?raw';
+import htmlTemplate from '$lib/nodemailer/modify-delete.html?raw';
 
 
 export async function create_request(
@@ -83,12 +86,11 @@ export async function create_request(
         // If changing email, send code to the NEW email to verify ownership
         const recipient = type === 'Change Email' ? (newEmail ?? '') : email;
 
-        const staticDir = path.resolve(process.cwd(), 'static');
         await sendEmail({
             to: recipient,
             subject: 'Your verification code',
-            textPath: path.join(staticDir, 'modify-delete.txt'),
-            htmlPath: path.join(staticDir, 'modify-delete.html'),
+            textTpl: textTemplate,
+            htmlTpl: htmlTemplate,
             data: { code: code.toString() }
         });
 

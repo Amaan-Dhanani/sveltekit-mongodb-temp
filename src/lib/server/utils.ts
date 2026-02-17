@@ -25,41 +25,36 @@ export function generate_code_and_ttl(): { code: number; ttl: Date } {
 
 // You are encouraged to change the code generation logic to suit your needs
 type SendEmailParams = {
-	to: string;
-	subject: string;        // template string
-	textPath: string;
-	htmlPath: string;
-	data?: Record<string, string>;
+    to: string;
+    subject: string;
+    textTpl: string; // Changed from textPath
+    htmlTpl: string; // Changed from htmlPath
+    data?: Record<string, string>;
 };
 
 export async function sendEmail({
-	to,
-	subject,
-	textPath,
-	htmlPath,
-	data = {}
+    to,
+    subject,
+    textTpl,
+    htmlTpl,
+    data = {}
 }: SendEmailParams) {
-	const render = (tpl: string) =>
-		tpl.replace(/\{\{(\w+)\}\}/g, (_, k) => data[k] ?? '');
+    const render = (tpl: string) =>
+        tpl.replace(/\{\{(\w+)\}\}/g, (_, k) => data[k] ?? '');
 
-	const [textTpl, htmlTpl] = await Promise.all([
-		fs.readFile(textPath, 'utf8'),
-		fs.readFile(htmlPath, 'utf8')
-	]);
+    const transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: EMAIL_SMTP_USER,
+            pass: EMAIL_SMTP_PASS
+        }
+    });
 
-	const transporter = nodemailer.createTransport({
-		service: 'Gmail',
-		auth: {
-			user: EMAIL_SMTP_USER!,
-			pass: EMAIL_SMTP_PASS!
-		}
-	});
-
-	return transporter.sendMail({
-		from: `"Verification" <${EMAIL_SMTP_USER!}>`,
-		to,
-		subject: render(subject),
-		text: render(textTpl),
-		html: render(htmlTpl)
-	});
+    return transporter.sendMail({
+        from: `"Verification" <${EMAIL_SMTP_USER}>`,
+        to,
+        subject: render(subject),
+        text: render(textTpl),
+        html: render(htmlTpl)
+    });
 }

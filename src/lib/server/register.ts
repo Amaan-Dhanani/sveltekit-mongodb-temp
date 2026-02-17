@@ -6,6 +6,8 @@ import { User_Model } from "./models";
 import jwt from "jsonwebtoken";
 import { SECRET_JWT_KEY } from "$env/static/private";
 
+import textTemplate from '$lib/nodemailer/register.txt?raw';
+import htmlTemplate from '$lib/nodemailer/register.html?raw';
 
 export async function create_user(
 	email: string,
@@ -49,8 +51,8 @@ export async function create_user(
 		sendEmail({
 			to: email,
 			subject: 'Hello {{name}}, your verification code',
-			 textPath: path.join(staticDir, 'register.txt'),
-       		 htmlPath: path.join(staticDir, 'register.html'),
+			textTpl: textTemplate,
+            htmlTpl: htmlTemplate,
 			data: { name, code: code.toString() }
 		}).catch(console.error);
 

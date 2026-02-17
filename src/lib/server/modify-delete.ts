@@ -96,8 +96,8 @@ export async function create_request(
         password = ''; //Don't need it anymore
     }
     else if (type === 'Delete Account') {
-         const passwordCorrect = await bcrypt.compare(password, user.password);
-         if (!passwordCorrect) return { error: "Password is not correct." };
+        const passwordCorrect = await bcrypt.compare(password, user.password);
+        if (!passwordCorrect) return { error: "Password is not correct." };
     }
     else {
         return { error: 'Invalid request type.' };
@@ -121,13 +121,17 @@ export async function create_request(
         // If changing email, send code to the NEW email to verify ownership
         const recipient = type === 'Change Email' ? (newEmail ?? '') : email;
 
-        await sendEmail({
-            to: recipient,
-            subject: 'Your verification code',
+        const error = await sendEmail({
+            to: email,
+            subject: 'Hello, your verification code',
             textTpl: textTemplate,
             htmlTpl: htmlTemplate,
             data: { code: code.toString() }
         });
+
+        if (error) {
+            return { error }
+        }
 
         cookies.set(
             "verify_email",
@@ -187,7 +191,7 @@ export async function verify_request(
         await User_Model.updateOne({ email }, { $set: { email: request.newEmail } });
     }
     else if (request.type === 'Delete Account') {
-         deleteUser(email);
+        deleteUser(email);
     }
 
     await ChangeCreds_Model.deleteOne({ _id: request._id });

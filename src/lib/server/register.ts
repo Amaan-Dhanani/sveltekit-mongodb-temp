@@ -84,14 +84,17 @@ export async function create_user(
 		await user.save();
 
 		// Don't block user creation on email
-		const staticDir = path.resolve(process.cwd(), 'static');
-		sendEmail({
+		const error = await sendEmail({
 			to: email,
 			subject: 'Hello {{name}}, your verification code',
 			textTpl: textTemplate,
 			htmlTpl: htmlTemplate,
 			data: { name, code: code.toString() }
-		}).catch(console.error);
+		});
+
+		if (error) {
+			return  { error}
+		}
 
 		// Setting a cookie with JWT token to transfer email between actions. Server use only.
 		cookies.set(

@@ -26,7 +26,7 @@ type SendEmailParams = {
     data?: Record<string, string>;
 };
 
-export async function sendEmail({ to, subject, textTpl, htmlTpl, data = {} }: SendEmailParams) {
+export async function sendEmail({ to, subject, textTpl, htmlTpl, data = {} }: SendEmailParams): Promise<string | null> {
     const render = (tpl: string) => tpl.replace(/\{\{(\w+)\}\}/g, (_, k) => data[k] ?? '');
     const transporter = nodemailer.createTransport({
         service: 'Gmail',
@@ -40,17 +40,17 @@ export async function sendEmail({ to, subject, textTpl, htmlTpl, data = {} }: Se
     });
 
     try {
-  
-        const info = await transporter.sendMail({
+        await transporter.sendMail({
             from: `"Your App" <${EMAIL_SMTP_USER}>`,
             to,
             subject: render(subject),
             text: render(textTpl),
             html: render(htmlTpl)
         });
-        return { success: true, messageId: info.messageId };
-    } catch (error) {
-        console.error('Nodemailer Error:', error);
-        throw error;
+        
+        return null;
+    } catch (err: any) {
+        console.error('Nodemailer Error:', err);
+        return err instanceof Error ? err.message : String(err);
     }
 }

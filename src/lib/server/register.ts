@@ -4,6 +4,7 @@ import type { Cookies } from "@sveltejs/kit";
 import { User_Model } from "./models";
 import jwt from "jsonwebtoken";
 import { SECRET_JWT_KEY } from "$env/static/private";
+import { base } from '$app/paths';
 
 
 export async function create_user(
@@ -47,8 +48,8 @@ export async function create_user(
 		sendEmail({
 			to: email,
 			subject: 'Hello {{name}}, your verification code',
-			textPath: 'src/lib/nodemailer/register.txt',
-			htmlPath: 'src/lib/nodemailer/register.html',
+			textPath: 'static/register.txt',
+			htmlPath: 'static/register.html',
 			data: { name, code: code.toString() }
 		}).catch(console.error);
 

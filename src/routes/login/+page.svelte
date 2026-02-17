@@ -32,7 +32,7 @@
 					<a href="/register" class="text-primary font-bold underline">Sign Up</a>
 				</Flex>
 				<Flex row center class="gap-2">
-					<Text lg class="opacity-80">Wanna change your login credentials or delete your account?</Text>
+					<Text lg class="opacity-80">Wanna delete or modify your account?</Text>
 					<a href="/modify-delete" class="text-primary font-bold underline">Click here</a>
 				</Flex>
 			</form>

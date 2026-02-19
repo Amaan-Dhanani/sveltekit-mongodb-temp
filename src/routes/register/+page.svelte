@@ -20,7 +20,7 @@
 		form,
 		enhance: formEnhance,
 		errors
-	} = superForm(data.form, {
+		} = superForm(data.form, {
 		validators: zod4(registerSchema),
 		applyAction: false,
 		onResult({ result }) {
@@ -40,7 +40,6 @@
 		<Flex row fill>
 			{#if !showSecondForm}
 				<form method="POST" action="?/register" autocomplete="off" class="box-border flex size-full flex-col" use:formEnhance>
-					<Input type="text" class="mb-4" name="name" label="Name" bind:value={$form.name} />
 
 					<!--this hex code (#858597) is only used like twice so it dont matter-->
 					<Text class="!text-[#858597] !text-[14px]">Type</Text>
@@ -98,7 +97,6 @@
 			</Frame>
 		</Flex>
 
-		<Error duration={3000} error={$errors.name} />
 		<Error duration={3000} error={$errors.email} />
 		<Error duration={3000} error={$errors.password} />
 		{#if !codeForm?.go_back_btn}

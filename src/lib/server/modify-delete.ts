@@ -123,7 +123,7 @@ export async function create_request(
 
         const error = await sendEmail({
             to: email,
-            subject: 'Hello, your verification code',
+            subject: 'Hello, here is your verification code',
             textTpl: textTemplate,
             htmlTpl: htmlTemplate,
             data: { code: code.toString() }

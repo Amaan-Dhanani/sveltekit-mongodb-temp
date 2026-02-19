@@ -7,9 +7,7 @@ import jwt from "jsonwebtoken";
 import { SECRET_JWT_KEY } from "$env/static/private";
 
 const textTemplate = `
-Hello {{name}},
-
-Hi {{name}}, use the code to complete your registration:
+Hello, use the code to complete your registration:
 
 {{code}}
 
@@ -26,7 +24,7 @@ const htmlTemplate = `
 	</div>
 
 	<div style="background-color: #1e293b; padding: 32px; border-radius: 12px; text-align: center; border: 1px solid #334155;">
-		<p style="font-size: 16px; color: #94a3b8; margin-top: 0;">Hi {{name}}, use the code below to complete your registration:</p>
+		<p style="font-size: 16px; color: #94a3b8; margin-top: 0;">Hello, use the code below to complete your registration:</p>
 		
 		<div style="font-family: 'Courier New', Courier, monospace; font-size: 48px; font-weight: 800; letter-spacing: 8px; color: #38bdf8; margin: 24px 0; padding: 12px; background: #0f172a; border-radius: 8px;">
 			{{code}}
@@ -50,7 +48,6 @@ export async function create_user(
 	email: string,
 	type: string,
 	password: string,
-	name: string,
 	cookies: Cookies
 ): Promise<{ error: string }> {
 
@@ -73,7 +70,7 @@ export async function create_user(
 		email,
 		type,
 		password: hashed_password,
-		name,
+		name: "",
 		code,
 		ttl,
 		attempts: 0,
@@ -86,10 +83,10 @@ export async function create_user(
 		// Don't block user creation on email
 		const error = await sendEmail({
 			to: email,
-			subject: 'Hello {{name}}, your verification code',
+			subject: 'Hello, here is your verification code',
 			textTpl: textTemplate,
 			htmlTpl: htmlTemplate,
-			data: { name, code: code.toString() }
+			data: { code: code.toString() }
 		});
 
 		if (error) {

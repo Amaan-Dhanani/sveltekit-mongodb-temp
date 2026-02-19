@@ -18,7 +18,6 @@ const passwordRequirements = z.string().superRefine((val, ctx) => {
 });
 
 export const registerSchema = z.object({
-    name: z.string().min(2, "Name has to be at least 2 characters."),
     type: z.string().min(1, 'Please select an option from the dropdown.'),
     email: z.email('Please enter a valid email.'),
     password: passwordRequirements

@@ -8,7 +8,7 @@
     let {
         children,
         class: className,
-        contentClass = $bindable('*:border-0 flex flex-col border-box mt-2 w-56 rounded-md bg-[#F0F0F2] dark:bg-[#3E3E55] shadow-lg ring-1 ring-black/5 focus:outline-hidden'),
+        contentClass = $bindable('*:border-0 flex flex-col border-box mt-2 w-56 rounded-md bg-secondary shadow-lg ring-1 ring-black/5 focus:outline-hidden'),
         ...rest
     }: ContentProps = $props();
 
@@ -21,7 +21,7 @@
 </script>
 
 {#if _state.active}
-    <div bind:this={_state.content_reference} class={ contentCls } {...rest}>
+    <div bind:this={_state.content_reference} class={ cn(`${_state.active ? 'opacity-100': 'opacity-0'} `, contentCls)  } {...rest}>
         {@render children?.()}
     </div>
 {/if}

@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { Header, Text, Error, Input, TextRedactor, CodeInput, Dropdown } from '$lib/components';
-	import { Flex, Frame, Button } from 'sk-clib';
+	import { Error, Input, TextRedactor, CodeInput, Dropdown } from '$lib/components';
+	import { Flex, Frame, Button, Header, Text } from 'sk-clib';
 	import Logo from '$lib/images/Logo.png';
-	import { Speedial } from '$lib/components';
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 
@@ -33,19 +32,16 @@
 </script>
 
 <Flex col fill class="mt-20">
-	<Speedial />
-	<Header bold class="ml-4 !text-3xl sm:ml-0">Sign Up</Header>
-	<Text lg class="ml-4 opacity-80 sm:ml-0">Enter your details below to start your journey!</Text>
-	<Flex col fill class="dark:bg-secondary mt-2 box-border rounded-t-2xl bg-white p-6">
+	<Header bold class="ml-4 !text-3xl sm:ml-0 text-on-surface">Sign Up</Header>
+	<Text lg class="ml-4 opacity-80 sm:ml-0 text-on-surface">Enter your details below to start your journey!</Text>
+	<Flex col fill class="bg-surface-variant mt-2 box-border rounded-t-2xl p-6">
 		<Flex row fill>
 			{#if !showSecondForm}
 				<form method="POST" action="?/register" autocomplete="off" class="box-border flex size-full flex-col" use:formEnhance>
-
-					<!--this hex code (#858597) is only used like twice so it dont matter-->
-					<Text class="!text-[#858597] !text-[14px]">Type</Text>
+					<Text class="text-secondary !text-[14px]">Type</Text>
 					<Dropdown.Menu class="mb-4">
 						<Dropdown.Trigger>
-							<Dropdown.Button class="rounded-lg">{$form.type || 'Select an Option'}</Dropdown.Button>
+							<Button class="bg-secondary hover:text-white dark:hover:text-black cursor-pointer block px-4 py-2 text-sm text-gray-700 w-full text-left" form="">{$form.type || 'Select an Option'}</Button>
 						</Dropdown.Trigger>
 						<Dropdown.Content>
 							<Dropdown.Button
@@ -66,10 +62,10 @@
 					<Input type="text" class="mb-4" name="email" label="Email" bind:value={$form.email} />
 					<Input type="password" class="mb-7" label="Password" name="password" bind:value={$form.password} />
 
-					<Button class="bg-primary mb-4 h-12 w-full cursor-pointer rounded-xl text-white">Register</Button>
+					<Button class="bg-seed mb-4 h-12 w-full cursor-pointer rounded-xl text-white">Register</Button>
 
 					<Flex row center class="gap-2">
-						<Text lg class="opacity-80">Already have an account?</Text>
+						<Text lg class="text-on-surface">Already have an account?</Text>
 						<a href="/login" class="text-primary font-bold underline">Sign In</a>
 					</Flex>
 				</form>
@@ -84,7 +80,7 @@
 						registration process again.
 					</Text>
 					<CodeInput classWrapper="pb-[3px]" name="code" />
-					<Button class="bg-primary mx-auto mb-4 h-10 w-fit cursor-pointer text-white">Verify</Button>
+					<Button class="bg-seed mx-auto mb-4 h-10 w-fit cursor-pointer text-white">Verify</Button>
 				</form>
 			{/if}
 

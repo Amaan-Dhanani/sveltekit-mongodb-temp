@@ -9,9 +9,9 @@
 		children,
 		class: className,
 		inputClass = $bindable(
-			'dark:bg-[#3E3E55] bg-[#F0F0F2] truncate dark:text-white dark:outline-0 outline box-border outline-[#e0e0e2] rounded-3 px-3 py-4 w-full text-[14px] rounded-[12px] px-4 py-3'
+			'bg-secondary truncate text-on-secondary outline box-border rounded-3 px-3 py-4 w-full text-[14px] rounded-[12px] px-4 py-3'
 		),
-		labelClass = $bindable('text-[#858597] text-[14px]'),
+		labelClass = $bindable('text-secondary text-[14px]'),
 		classLabel = $bindable(''),
 		label = $bindable(undefined),
 		value = $bindable(undefined),
@@ -46,7 +46,7 @@
 		<button
 			type="button"
 			onclick={togglePassword}
-			class="absolute inset-y-0 end-0 z-20 cursor-pointer items-center rounded-e-md px-3 text-gray-400 focus:text-blue-600 focus:outline-none dark:text-white dark:focus:text-blue-500"
+			class="absolute inset-y-0 end-0 z-20 cursor-pointer items-center rounded-e-md px-3 text-on-secondary focus:text-primary focus:outline-none dark:text-white dark:focus:text-blue-500"
 			aria-label="Toggle password visibility"
 		>
 			<!-- eye / eye‑off icon -->

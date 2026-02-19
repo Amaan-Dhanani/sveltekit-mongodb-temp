@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { Header, Text, Error, Input, CodeInput, Dropdown } from '$lib/components';
-	import { Flex, Frame, Button } from 'sk-clib';
+	import { Error, Input, CodeInput, Dropdown } from '$lib/components';
+	import { Flex, Frame, Button, Header, Text } from 'sk-clib';
 	import Logo from '$lib/images/Logo.png';
-	import { Speedial } from '$lib/components';
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 
@@ -35,16 +34,13 @@
 </script>
 
 <Flex col fill class="mt-20">
-	<Speedial />
-	<Header bold class="ml-4 !text-3xl sm:ml-0">Modify or Delete Account</Header>
-	<Text lg class="ml-4 opacity-80 sm:ml-0">Reset your email/password or delete your account all right here!</Text>
-	<Flex col fill class="dark:bg-secondary mt-2 box-border rounded-t-2xl bg-white p-6">
+	<Header bold class="ml-4 !text-3xl sm:ml-0 text-on-surface">Modify or Delete Account</Header>
+	<Text lg class="ml-4 opacity-80 sm:ml-0 text-on-surface">Reset your email/password or delete your account all right here!</Text>
+	<Flex col fill class="bg-surface-variant mt-2 box-border rounded-t-2xl p-6">
 		<Flex row fill>
 			{#if !showSecondForm}
 				<form method="POST" action="?/modifyDelete" autocomplete="off" class="box-border flex size-full flex-col" use:formEnhance>
-
-					<!--this hex code (#858597) is only used like twice so it don't matter-->
-					<Text class="!text-[#858597] !text-[14px]">Action</Text>
+					<Text class="text-secondary !text-[14px]">Action</Text>
 					<Dropdown.Menu class="mb-4">
 						<Dropdown.Trigger>
 							<Dropdown.Button class="rounded-lg">{$form.type || 'Select an Option'}</Dropdown.Button>
@@ -88,7 +84,7 @@
 					<Input type={newEmailType} class="mb-4" name="newEmail" label="New Email" bind:value={$form.newEmail} />
 					<Input type="password" class="mb-7" name="password" label={passwordInputLabel + 'Password'} bind:value={$form.password} />
 
-					<Button class="bg-primary mb-4 h-12 w-full cursor-pointer rounded-xl text-white">Continue</Button>
+					<Button class="bg-seed mb-4 h-12 w-full cursor-pointer rounded-xl text-white">Continue</Button>
 
 					<Flex row center class="gap-2">
 						<a href="/" class="text-primary font-bold underline">Back to home</a>
@@ -107,7 +103,7 @@
 						By entering this code, {additionalText}!
 					</Text>
 					<CodeInput classWrapper="pb-[3px]" name="code" />
-					<Button class="bg-primary mx-auto mb-4 h-10 w-fit cursor-pointer text-white">Verify</Button>
+					<Button class="bg-seed mx-auto mb-4 h-10 w-fit cursor-pointer text-white">Verify</Button>
 				</form>
 			{/if}
 

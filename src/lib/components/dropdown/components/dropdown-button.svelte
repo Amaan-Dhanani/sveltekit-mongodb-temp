@@ -5,18 +5,19 @@
     import type { ButtonProps } from ".."
 	import { Button } from 'sk-clib';
 	import { getDropdownCtx } from '../ctx.svelte';
+	import { _startsWith } from 'zod/v4/core';
     
     let {
         children,
         class: className,
-        buttonClass = $bindable('dark:hover:bg-gray-100 hover:bg-[#3E3E55] hover:text-white dark:hover:text-black cursor-pointer block px-4 py-2 text-sm text-gray-700 w-full text-left'),
+        buttonClass = $bindable('bg-secondary cursor-pointer block px-4 py-2 text-sm text-gray-700 w-full text-left'),
         href = $bindable(undefined),
         onclick = $bindable(() => {}),
         ...rest
     }: ButtonProps = $props();
 
     // --- Context ---
-    const {_class} = getDropdownCtx()
+    const {_class, toggle} = getDropdownCtx()
 
     function route_to() {
         if (!href) return;
@@ -34,7 +35,10 @@
 
 </script>
 
-<Button class={ buttonCls } {...rest} {onclick}>
+<Button class={ buttonCls } {...rest} onclick={(e) => {
+    onclick?.(e);
+    toggle();    
+}} form="">
     {@render children?.()}
 </Button>
 

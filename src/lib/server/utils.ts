@@ -41,7 +41,7 @@ export async function sendEmail({ to, subject, textTpl, htmlTpl, data = {} }: Se
 
     try {
         await transporter.sendMail({
-            from: `"Your App" <${EMAIL_SMTP_USER}>`,
+            from: `"Verification" <${EMAIL_SMTP_USER}>`,
             to,
             subject: render(subject),
             text: render(textTpl),

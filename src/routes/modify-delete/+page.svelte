@@ -43,7 +43,7 @@
 					<Text class="text-secondary !text-[14px]">Action</Text>
 					<Dropdown.Menu class="mb-4">
 						<Dropdown.Trigger>
-							<Dropdown.Button class="rounded-lg">{$form.type || 'Select an Option'}</Dropdown.Button>
+							<Button class="bg-secondary text-on-secondary cursor-pointer block px-4 py-2 text-sm w-full text-left" form="">{$form.type || 'Select an Option'}</Button>
 						</Dropdown.Trigger>
 						<Dropdown.Content>
 							<Dropdown.Button
@@ -53,7 +53,6 @@
 									whichEmail = 'your new email address';
 									newEmailType = 'text';
 									additionalText = 'you are changing your email address';
-
 								}}>Change Email</Dropdown.Button
 							>
 							<Dropdown.Divider />
@@ -93,7 +92,7 @@
 			{/if}
 
 			{#if showSecondForm && !codeForm?.go_back_btn}
-				<form method="POST" action="?/code" class="box-border flex size-full flex-col gap-4" use:enhance>
+				<form method="POST" action="?/code" class="box-border flex size-full flex-col gap-4 text-on-surface" use:enhance>
 					<Text bold class="text-center">Verify Code</Text>
 					<Text class="text-center text-sm">
 						We just emailed a verification code to {whichEmail}. Please check your inbox. If you don’t see it, check your spam folder. The code

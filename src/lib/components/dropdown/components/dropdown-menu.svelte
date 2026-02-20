@@ -13,8 +13,7 @@
         dropdownClass = $bindable(''),
         buttonClass = $bindable('px-4 py-2 bg-secondary text-sm font-medium rounded-none'),
         contentClass = $bindable('flex items-center justify-center overflow-hidden'),
-        dividerClass = $bindable('bg-(--color-secondary)/10'),
-
+        dividerClass = $bindable('bg-black/10'),
         // User Defined Classes
         classButton = $bindable(''),
         classContent = $bindable(''),

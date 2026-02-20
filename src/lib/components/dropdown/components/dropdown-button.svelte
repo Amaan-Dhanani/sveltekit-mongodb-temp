@@ -10,7 +10,7 @@
     let {
         children,
         class: className,
-        buttonClass = $bindable('bg-secondary cursor-pointer block px-4 py-2 text-sm text-gray-700 w-full text-left'),
+        buttonClass = $bindable('bg-secondary cursor-pointer block px-4 py-2 text-sm text-on-secondary w-full text-left'),
         href = $bindable(undefined),
         onclick = $bindable(() => {}),
         ...rest

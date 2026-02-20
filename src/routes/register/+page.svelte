@@ -72,7 +72,7 @@
 			{/if}
 
 			{#if showSecondForm && !codeForm?.go_back_btn}
-				<form method="POST" action="?/code" class="box-border flex size-full flex-col gap-4" use:enhance>
+				<form method="POST" action="?/code" class="box-border flex size-full flex-col gap-4 text-on-surface" use:enhance>
 					<Text bold class="text-center">Verify Code</Text>
 					<Text class="text-center text-sm">
 						We just emailed a verification code to <TextRedactor class="text-primary" text={returnedEmail} />. Please check your inbox. If you don’t
@@ -95,6 +95,7 @@
 
 		<Error duration={3000} error={$errors.email} />
 		<Error duration={3000} error={$errors.password} />
+		<Error duration={3000} error={$errors.type} />
 		{#if !codeForm?.go_back_btn}
 			<Error duration={3000} error={codeForm?.error} />
 		{/if}

@@ -10,7 +10,7 @@ export const cookie_options = {
 
 export function generate_code_and_ttl(): { code: number; ttl: Date } {
     const digits = 6;
-    const time = 10; 
+    const time = 10; //minutes
     const code = Math.floor(
         Math.pow(10, digits - 1) + Math.random() * (Math.pow(10, digits) - Math.pow(10, digits - 1))
     );

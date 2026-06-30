@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Error, LightDark } from '$lib/components';
-	import { Flex, Frame, Header, Text } from 'sk-clib';
+	import { Flex, Frame, Header, Text } from 'sk-clib/ui';
 	import Logo from '$lib/images/Logo.png';
     import { goto } from '$app/navigation';
 </script>
@@ -9,7 +9,7 @@
 	<Flex class="sticky mr-4 h-16 justify-end">
 		<LightDark />
 	</Flex>
-	<Header bold class="text-on-surface ml-4 !text-3xl sm:ml-0">Not Authorized</Header>
+	<Header bold class="text-on-surface ml-4 text-3xl! sm:ml-0">Not Authorized</Header>
 	<Text lg class="text-on-surface ml-4 opacity-80 sm:ml-0">Don't worry! It's nothing to freak out about!</Text>
 	<Flex col fill surfaceVariant class="mt-2 box-border rounded-t-2xl p-6">
 		<Flex fill>

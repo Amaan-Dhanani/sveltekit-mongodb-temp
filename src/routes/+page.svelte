@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Flex, Button } from 'sk-clib';
+	import { Flex, Button } from 'sk-clib/ui';
 	import Logo from '$lib/images/Logo.png';
 	import { LightDark } from '$lib/components';
 </script>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { theme } from 'sk-clib/theme';
-	import { Frame, Flex, Text } from 'sk-clib';
+	import { Frame, Flex, Text } from 'sk-clib/ui';
 	import { cn } from '$lib/utils';
 	import IconDark from '~icons/material-symbols/dark-mode-outline';
 	import IconLight from '~icons/material-symbols/light-mode-outline';

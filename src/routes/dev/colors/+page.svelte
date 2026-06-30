@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Flex, Text, Button } from "sk-clib";
+	import { Flex, Text, Button } from "sk-clib/ui";
 	import { onMount } from "svelte";
 	import { getCookie } from "$lib/utils";
 	import { theme } from "sk-clib/theme";

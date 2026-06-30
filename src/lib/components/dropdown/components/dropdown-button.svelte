@@ -3,7 +3,7 @@
     // --- Logic ---
     import { cn } from '$lib/utils';
     import type { ButtonProps } from ".."
-	import { Button } from 'sk-clib';
+	import { Button } from 'sk-clib/ui';
 	import { getDropdownCtx } from '../ctx.svelte';
     
     let {
@@ -64,7 +64,7 @@
     If `href` is provided, clicking the button performs a client-side redirect. Otherwise, `onclick` fires normally.
 
     @rendered
-    Renders a `<Button>` from `sk-clib`, passing the merged class and all other props.
+    Renders a `<Button>` from `sk-clib/ui`, passing the merged class and all other props.
 
     @usage
     Use this component for both internal navigation and actions:

@@ -3,7 +3,7 @@
 	// --- Logic ---
 	import { cn } from '$lib/utils';
 	import type { Props } from '..';
-	import { Flex, Frame } from 'sk-clib';
+	import { Flex, Frame } from 'sk-clib/ui';
 
 	let {
 		class: className,

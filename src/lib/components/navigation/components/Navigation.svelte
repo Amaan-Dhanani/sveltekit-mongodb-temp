@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Flex, Button, Text } from "sk-clib";
+	import { Flex, Button, Text } from "sk-clib/ui";
 	import { type Component } from "svelte";
 	import IconSettings from '~icons/ic/baseline-settings';
 	import IconDashboard from '~icons/material-symbols/dashboard';

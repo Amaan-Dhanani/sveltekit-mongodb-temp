@@ -2,7 +2,7 @@
 	import RoundSuccess from '~icons/ic/baseline-check-circle';
 	import type { Props } from '..';
 	import { cn } from '$lib/utils';
-	import { Frame, Flex } from 'sk-clib';
+	import { Frame, Flex } from 'sk-clib/ui';
 	import { fade } from 'svelte/transition'; // Added for smooth "fade"
 
 	let { 
@@ -15,8 +15,7 @@
 		class: className 
 	}: Props = $props();
 
-	// svelte-ignore state_referenced_locally
-		let divCls = $state(cn(divClass, className));
+	let divCls = $state(cn(divClass, className));
 	
 	$effect(() => {
 		divCls = cn(divClass, className);

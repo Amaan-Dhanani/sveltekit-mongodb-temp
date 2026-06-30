@@ -2,13 +2,11 @@
 	import RoundError from '~icons/ic/round-error';
 	import type { Props } from '..';
 	import { cn } from '$lib/utils';
-	import { Frame, Flex } from 'sk-clib';
+	import { Frame, Flex } from 'sk-clib/ui';
 	import { fade } from 'svelte/transition'; // Added for smooth "fade"
 
 	let { error = $bindable(), big, onclick, btnText, duration, divClass = $bindable('w-full'), class: className }: Props = $props();
-
-	// svelte-ignore state_referenced_locally
-		let divCls = $state(cn(divClass, className));
+	let divCls = $state(cn(divClass, className));
 
 	$effect(() => {
 		divCls = cn(divClass, className);

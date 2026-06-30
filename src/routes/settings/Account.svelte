@@ -1,12 +1,9 @@
 <script lang="ts">
 	import { LightDark, Input, TextRedactor, CodeInput, Dropdown, Error, Success } from '$lib/components';
-	import { Flex, Frame, Button, Header, Text } from 'sk-clib';
+	import { Flex, Frame, Button, Header, Text } from 'sk-clib/ui';
 	import Logo from '$lib/images/Logo.png';
 	import { goto } from '$app/navigation';
 	import Back from '~icons/mdi/arrow-back';
-
-	let form_el: HTMLFormElement;
-
 
 	// Errors for forms
 	let emailError = $state('');
@@ -16,9 +13,8 @@
 	let codeError = $state('');
 	let go_back_btn = $state(false);
 
-	// svelte-ignore non_reactive_update
+
 	let firstForm: HTMLFormElement; // to bind 1st form
-	// svelte-ignore non_reactive_update
 	let secondForm: HTMLFormElement; // to bind 2nd form
 	let formStep = $state(1); // to help manage which form user is on
 	let returnedEmail = $state(''); // email field to transfer data b/t users
@@ -41,7 +37,7 @@
 
 		if (typeValue === 'Select an Option') return;
 
-		const response = await fetch(`/api/modify-delete/create`, {
+		const response = await fetch(`/api/settings/account/create`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(Object.fromEntries(new FormData(firstForm)))
@@ -68,7 +64,7 @@
 	async function secondForm_submit(event: Event) {
 		event.preventDefault(); // no refresh
 
-		const response = await fetch('/api/modify-delete/verify', {
+		const response = await fetch('/api/settings/account/verify', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(Object.fromEntries(new FormData(secondForm)) as any)
@@ -91,7 +87,7 @@
 		<LightDark />
 	</Flex>
 
-	<Header bold class="text-on-surface ml-4 !text-3xl sm:ml-0">Modify or Delete Account</Header>
+	<Header bold class="text-on-surface ml-4 text-3xl! sm:ml-0">Modify or Delete Account</Header>
 
 	<Text lg class="text-on-surface ml-4 opacity-80 sm:ml-0">Reset your email/password or delete your account all right here!</Text>
 
@@ -99,7 +95,7 @@
 		<Flex fill>
 		{#if formStep == 1}
 			<form class="box-border flex size-full flex-col" bind:this={firstForm} onsubmit={firstForm_submit}>
-				<Text class="text-secondary !text-[14px]">Action</Text>
+				<Text class="text-secondary text-[14px]!">Action</Text>
 				<Dropdown.Menu class="mb-4">
 					<Dropdown.Trigger>
 						<!--Need to have empty form attrbiute so the "button" isn't a "submit button"-->

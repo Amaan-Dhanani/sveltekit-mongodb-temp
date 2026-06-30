@@ -36,7 +36,7 @@
 	});
 
 	import '../app.css';
-	import { Flex } from 'sk-clib';
+	import { Flex } from 'sk-clib/ui';
 	import { ThemeInit } from 'sk-clib/theme';
 
 	let { children } = $props();

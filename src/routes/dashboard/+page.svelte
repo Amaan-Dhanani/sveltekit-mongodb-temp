@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { Flex, Frame, Button, Header, Text } from 'sk-clib/ui';
+	import { Flex, Frame, Button, Text } from 'sk-clib/ui';
 	import { Error, Navigation } from '$lib/components';
 	import Logo from '$lib/images/Logo.png';
 	import { getCookie } from '$lib/utils';
@@ -24,9 +24,9 @@
 </script>
 
 <Flex col fill class="mt-20">
-	<Header bold class="text-on-surface ml-4 text-3xl! sm:ml-0">
+	<Text bold class="text-on-surface ml-4 text-3xl! sm:ml-0">
 		{greeting}
-	</Header>
+	</Text>
 
 	<Text lg class="text-on-surface ml-4 opacity-80 sm:ml-0">Here is your dashboard!</Text>
 

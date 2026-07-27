@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { LightDark, Input, TextRedactor, CodeInput, Dropdown, Error, Success } from '$lib/components';
-	import { Flex, Frame, Button, Header, Text } from 'sk-clib/ui';
+	import { Flex, Frame, Button, Text } from 'sk-clib/ui';
 	import Logo from '$lib/images/Logo.png';
 	import { goto } from '$app/navigation';
 	import Back from '~icons/mdi/arrow-back';
@@ -87,7 +87,7 @@
 		<LightDark />
 	</Flex>
 
-	<Header bold class="text-on-surface ml-4 text-3xl! sm:ml-0">Modify or Delete Account</Header>
+	<Text bold class="text-on-surface ml-4 text-3xl! sm:ml-0">Modify or Delete Account</Text>
 
 	<Text lg class="text-on-surface ml-4 opacity-80 sm:ml-0">Reset your email/password or delete your account all right here!</Text>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Success, LightDark } from '$lib/components';
-	import { Flex, Frame, Header, Text } from 'sk-clib/ui';
+	import { Flex, Frame, Text } from 'sk-clib/ui';
 	import Logo from '$lib/images/Logo.png';
 	import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
@@ -25,9 +25,9 @@
 		<LightDark />
 	</Flex>
 
-	<Header bold class="text-on-surface ml-4 text-3xl! sm:ml-0">
+	<Text bold class="text-on-surface ml-4 text-3xl! sm:ml-0">
 		Logout
-	</Header>
+	</Text>
 
 	<Text lg class="text-on-surface ml-4 opacity-80 sm:ml-0">
 		You've safely escaped the app. For now.

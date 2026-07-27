@@ -58,12 +58,12 @@
 	<Flex col class="gap-5">
 		<input type="color" oninput={color_update} value={theme.seedColor} />
 
-		<select bind:value={theme.mode} class="bg-surface-variant w-fit rounded-md p-4">
+		<select bind:value={theme.mode} class="bg-surfaceVariant w-fit rounded-md p-4">
 			<option value="light">Light</option>
 			<option value="dark">Dark</option>
 		</select>
 
-		<select bind:value={theme.variant} class="bg-surface-variant w-fit rounded-md p-4">
+		<select bind:value={theme.variant} class="bg-surfaceVariant w-fit rounded-md p-4">
 			<option value="content">Content</option>
 			<option value="expressive">Expressive</option>
 			<option value="fidelity">Fidelity</option>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { LightDark, Input, TextRedactor, CodeInput, Dropdown, Error, Success } from '$lib/components';
-	import { Flex, Frame, Button, Header, Text } from 'sk-clib/ui';
+	import { Flex, Frame, Button, Text } from 'sk-clib/ui';
 	import { goto } from '$app/navigation';
 	import Logo from '$lib/images/Logo.png';
 	import { setCookie } from '$lib/utils';
@@ -74,7 +74,7 @@
 	<Flex class="sticky mr-4 h-16 justify-end">
 		<LightDark />
 	</Flex>
-	<Header bold class="text-on-surface ml-4 text-3xl! sm:ml-0">Sign Up</Header>
+	<Text bold class="text-on-surface ml-4 text-3xl! sm:ml-0">Sign Up</Text>
 	<Text lg class="text-on-surface ml-4 opacity-80 sm:ml-0">Enter your details below to start your journey!</Text>
 	<Flex col fill surfaceVariant class="mt-2 box-border rounded-t-2xl p-6">
 		<Flex fill>

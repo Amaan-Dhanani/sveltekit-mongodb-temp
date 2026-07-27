@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Frame, Flex, Button, Header, Text } from 'sk-clib/ui';
+	import { Frame, Flex, Button, Text } from 'sk-clib/ui';
 	import { goto } from '$app/navigation';
 	import { Error, Input, Success, LightDark, Navigation } from '$lib/components';
 	import Logo from '$lib/images/Logo.png';
@@ -58,7 +58,7 @@
 </script>
 
 <Flex col fill class="mt-20">
-	<Header bold class="text-on-surface ml-4 text-3xl! sm:ml-0">Settings</Header>
+	<Text bold class="text-on-surface ml-4 text-3xl! sm:ml-0">Settings</Text>
 	<Text lg class="text-on-surface ml-4 opacity-80 sm:ml-0">Adjust your simple settings here such as your name and theme!</Text>
 	<Flex col fill surfaceVariant class="mt-2 box-border gap-4 rounded-t-2xl p-6">
 		<form class="flex lg:w-[50%] mx-auto flex-row items-end gap-4" bind:this={nameForm} onsubmit={nameForm_submit}>

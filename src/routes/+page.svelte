@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Flex, Button } from 'sk-clib/ui';
 	import Logo from '$lib/images/Logo.png';
+	import { Input } from '@amaand/sveltekit-comps';
 	import { LightDark } from '$lib/components';
 </script>
 
@@ -10,6 +11,14 @@
 		<Button href="/login" class="bg-seed mb-4 h-16 w-full cursor-pointer rounded-2xl text-lg text-white">Register</Button>
 		<Button href="/login" class="bg-seed h-16 w-full cursor-pointer rounded-2xl text-lg text-white">Login</Button>
 		<Button href="/modify-delete" class="bg-seed h-16 w-full cursor-pointer rounded-xl text-white">Modify or Delete Account</Button>
+		<Input
+				name="link"
+				label="CopeCart Link"
+				placeholder="https://copecart.com/..."
+				class="mb-7"
+				required
+			/>
+
 		<Flex class="justify-end">
 			<LightDark />
 		</Flex>
